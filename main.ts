@@ -7,63 +7,61 @@ enum LED {
 
 enum MyDigitalPin {
     //% blockIdentity="pins._digitalPin"  // 关联系统引脚处理逻辑
-    P0 = MICROBIT_ID_IO_P0,
+    P0 = 100,
 
     //% blockIdentity="pins._digitalPin"
-    P1 = MICROBIT_ID_IO_P1,
+    P1 = 101,
 
     //% blockIdentity="pins._digitalPin"
-    P2 = MICROBIT_ID_IO_P2,
+    P2 = 102,
 
     //% blockIdentity="pins._digitalPin"
-    P3 = MICROBIT_ID_IO_P3,
+    P3 = 103,
 
     //% blockIdentity="pins._digitalPin"
-    P4 = MICROBIT_ID_IO_P4,
+    P4 = 104,
 
     //% blockIdentity="pins._digitalPin"
-    P5 = MICROBIT_ID_IO_P5,
+    P5 = 105,
 
     //% blockIdentity="pins._digitalPin"
-    P6 = MICROBIT_ID_IO_P6,
+    P6 = 106,
 
     //% blockIdentity="pins._digitalPin"
-    P7 = MICROBIT_ID_IO_P7,
+    P7 = 107,
 
     //% blockIdentity="pins._digitalPin"
-    P8 = MICROBIT_ID_IO_P8,
+    P8 = 108,
 
     //% blockIdentity="pins._digitalPin"
-    P9 = MICROBIT_ID_IO_P9,
+    P9 = 109,
 
     //% blockIdentity="pins._digitalPin"
-    P10 = MICROBIT_ID_IO_P10,
+    P10 = 110,
 
     //% blockIdentity="pins._digitalPin"
-    P11 = MICROBIT_ID_IO_P11,
+    P11 = 111,
 
     //% blockIdentity="pins._digitalPin"
-    P12 = MICROBIT_ID_IO_P12,
+    P12 = 112,
 
     //% blockIdentity="pins._digitalPin"
-    P13 = MICROBIT_ID_IO_P13,
+    P13 = 113,
 
     //% blockIdentity="pins._digitalPin"
-    P14 = MICROBIT_ID_IO_P14,
+    P14 = 114,
 
     //% blockIdentity="pins._digitalPin"
-    P15 = MICROBIT_ID_IO_P15,
+    P15 = 115,
 
     //% blockIdentity="pins._digitalPin"
-    P16 = MICROBIT_ID_IO_P16,
+    P16 = 116,
 
     //% blockIdentity="pins._digitalPin"
-    //% blockHidden=1  // 隐藏该引脚在积木界面中的显示
-    P19 = MICROBIT_ID_IO_P19,
+    P19 = 119,
 
     //% blockIdentity="pins._digitalPin"
-    //% blockHidden=1
-    P20 = MICROBIT_ID_IO_P20,
+    P20 = 120,
 }
 
 //% color="#31C7D5" weight=10 icon="\uf2db"
@@ -75,7 +73,7 @@ namespace Microbit_Kit {
     //% pin.fieldOptions.columns=4
     //% pin.fieldOptions.tooltips="false"
     //% blockHidden=1
-    export function _digitalPinShadow(pin: DigitalPin): number {
+    export function _digitalPinShadow(pin: MyDigitalPin): number {
         return pin;
     }
 
