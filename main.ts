@@ -27,4 +27,12 @@ namespace Microbit_Kit {
         return pins.analogReadPin(pin)
     }
 
+    //% blockId=Sound_Sensor block="Sound Sensor at %pin| get value"
+    //% group="Sound Sensor"
+    //% pin.shadow=analog_read_write_pin_shadow
+    //% weight=70
+    export function mySoundSensor(pin: AnalogPin): number {
+        return pins.analogReadPin(pin)
+    }
+
 }
