@@ -32,17 +32,16 @@ enum MyDigitalPin {
     P11 = 111,
     //% block="P12"
     P12 = 112,
-    //% block="P13"
+    //% block="P13(SCK)"
     P13 = 113,
-    //% block="P14"
+    //% block="P14(MISO)"
     P14 = 114,
-    //% block="P15"
+    //% block="P15(MOSI)"
     P15 = 115,
     //% block="P16"
     P16 = 116,
     //% block="P19(SCL)"
     P19 = 119,
-    //% block="P20(SDA)"
     //% block="P20(SDA)"
     P20 = 120,
 }
