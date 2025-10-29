@@ -8,58 +8,41 @@ enum LED {
 enum MyDigitalPin {
     //% block="P0"
     P0 = 100,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P1"
     P1 = 101,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P2"
     P2 = 102,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P3"
     P3 = 103,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P4"
     P4 = 104,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P5"
     P5 = 105,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P6"
     P6 = 106,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P7"
     P7 = 107,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P8"
     P8 = 108,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P9"
     P9 = 109,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P10"
     P10 = 110,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P11"
     P11 = 111,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P12"
     P12 = 112,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P13"
     P13 = 113,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P14"
     P14 = 114,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P15"
     P15 = 115,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P16"
     P16 = 116,
-
-    //% blockIdentity="pins._digitalPin"
+    //% block="P19(SCL)"
     P19 = 119,
-
+    //% block="P20(SDA)"
     //% block="P20(SDA)"
     P20 = 120,
 }
