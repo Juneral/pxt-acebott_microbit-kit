@@ -6,7 +6,7 @@ enum LED {
 }
 
 enum MyDigitalPin {
-    //% blockIdentity="pins._digitalPin"  // 关联系统引脚处理逻辑
+    //% block="P0"
     P0 = 100,
 
     //% blockIdentity="pins._digitalPin"
@@ -60,7 +60,7 @@ enum MyDigitalPin {
     //% blockIdentity="pins._digitalPin"
     P19 = 119,
 
-    //% blockIdentity="pins._digitalPin"
+    //% block="P20(SDA)"
     P20 = 120,
 }
 
