@@ -46,6 +46,21 @@ enum MyDigitalPin {
     P20 = 120,
 }
 
+enum MyAnalogPin {
+    //% block="P0"
+    P0 = 100,
+    //% block="P1"
+    P1 = 101,
+    //% block="P2"
+    P2 = 101,
+    //% block="P3(Col1)"
+    P3 = 103,
+    //% block="P4(Col2)"
+    P4 = 104,
+    //% block="P10(Col3)"
+    P10 = 110
+}
+
 //% color="#31C7D5" weight=10 icon="\uf2db"
 namespace Microbit_Kit {
 
@@ -65,7 +80,7 @@ namespace Microbit_Kit {
     //% pin.fieldOptions.columns=4
     //% pin.fieldOptions.tooltips="false"
     //% blockHidden=1
-    export function _analogReadWritePinShadow(pin: AnalogReadWritePin): number {
+    export function _analogReadWritePinShadow(pin: MyAnalogPin): number {
         return pin;
     }
 
