@@ -1,5 +1,5 @@
 //% color="#31C7D5" weight=10 icon="\uf2db"
-namespace JunBit {
+namespace Microbit_Kit {
 
     export enum LED {
         //% block="ON"
@@ -7,10 +7,16 @@ namespace JunBit {
         //% block="OFF"
         OFF = 0
     }
+
     //% blockId=SetLed block="LED at %pin| is %status"   group="LED"
     //% weight=70
-    //% subcategory="Display"
-    export function SetLed(pin: DigitalPin, status: LED): void {
+    export function myLED(pin: DigitalPin, status: LED): void {
         pins.digitalWritePin(pin, status)
+    }
+
+    //% blockId=Button block="Button at %pin| is pressed"   group="LED"
+    //% weight=70
+    export function myButton(pin: DigitalPin): boolean {
+        return pins.digitalReadPin(pin)==0?true:false;
     }
 }
