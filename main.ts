@@ -19,4 +19,12 @@ namespace Microbit_Kit {
     export function myButton(pin: DigitalPin): boolean {
         return pins.digitalReadPin(pin)==0?true:false;
     }
+
+    //% blockId=Light_Sensor block="Light Sensor at %pin| get value"
+    //% group="Light Sensor"
+    //% weight=70
+    export function myLightSensor(pin: AnalogPin): number {
+        return pins.analogReadPin(pin)
+    }
+
 }
