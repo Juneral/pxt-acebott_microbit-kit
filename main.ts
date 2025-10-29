@@ -77,7 +77,7 @@ namespace Microbit_Kit {
     //% blockId=my_analog_read_write_pin_shadow
     //% block="$pin"
     //% pin.fieldEditor=pinpicker
-    //% pin.fieldOptions.columns=4
+    //% pin.fieldOptions.columns=3
     //% pin.fieldOptions.tooltips="false"
     //% blockHidden=1
     export function _analogReadWritePinShadow(pin: MyAnalogPin): number {
