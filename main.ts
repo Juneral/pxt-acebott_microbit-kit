@@ -1,4 +1,4 @@
-//% color="#31C7D5" weight=10 icon="\uf3b5"
+//% color="#31C7D5" weight=10 icon="\uf2db"
 namespace JunBit {
 
     export enum LED {
