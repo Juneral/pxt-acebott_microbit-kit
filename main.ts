@@ -132,5 +132,10 @@ namespace Microbit_Kit {
         return pins.analogReadPin(pin)
     }
 
-
+    //% blockId=Infrared_Obstacle_Avoidance_Sensor block="Infrared Obstacle Avoidance Sensor at %pin| digital value"
+    //% group="Infrared Obstacle Avoidance Sensor"
+    //% pin.shadow=my_digital_pin_shadow
+    export function myInfrared_Obstacle_Avoidance_Sensor(pin: number): boolean {
+        return pins.digitalReadPin(pin) == 0 ? true : false;
+    }
 }
