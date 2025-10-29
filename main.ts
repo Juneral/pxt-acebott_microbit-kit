@@ -85,7 +85,6 @@ namespace Microbit_Kit {
     }
 
     //% blockId=SetLed block="LED at %pin| is %status"   group="LED"
-    //% weight=70
     //% pin.shadow=my_digital_pin_shadow
     export function myLED(pin: number, status: LED): void {
         pins.digitalWritePin(pin, status)
@@ -93,7 +92,6 @@ namespace Microbit_Kit {
 
     //% blockId=Button block="Button at %pin| is pressed" 
     //% group="Button"
-    //% weight=70
     //% pin.shadow=my_digital_pin_shadow
     export function myButton(pin: number): boolean {
         return pins.digitalReadPin(pin) == 0 ? true : false;
@@ -102,7 +100,6 @@ namespace Microbit_Kit {
     //% blockId=Light_Sensor block="Light Sensor at %pin| get value"
     //% group="Light Sensor"
     //% pin.shadow=my_analog_read_write_pin_shadow
-    //% weight=70
     export function myLightSensor(pin: number): number {
         return pins.analogReadPin(pin)
     }
@@ -110,8 +107,30 @@ namespace Microbit_Kit {
     //% blockId=Sound_Sensor block="Sound Sensor at %pin| get value"
     //% group="Sound Sensor"
     //% pin.shadow=my_analog_read_write_pin_shadow
-    //% weight=70
     export function mySoundSensor(pin: number): number {
         return pins.analogReadPin(pin)
     }
+
+    //% blockId=Tilt_Sensor block="Tilt Sensor at %pin| is tilted" 
+    //% group="Tilt Sensor"
+    //% pin.shadow=my_digital_pin_shadow
+    export function myTiltSensor(pin: number): boolean {
+        return pins.digitalReadPin(pin) == 1 ? true : false;
+    }
+
+    //% blockId=Soil_Moisture_Sensor_Digital block="Soil Moisture Sensor at %pin| digital value"
+    //% group="Soil Moisture Sensor"
+    //% pin.shadow=my_digital_pin_shadow
+    export function mySoilMoistureSensor_digitalValue(pin: number): boolean {
+        return pins.digitalReadPin(pin) == 1 ? true : false;
+    }
+
+    //% blockId=Soil_Moisture_Sensor_Analog block="Soil Moisture Sensor at %pin| analog value"
+    //% group="Soil Moisture Sensor"
+    //% pin.shadow=my_analog_read_write_pin_shadow
+    export function mySoilMoistureSensor_analogValue(pin: number): number {
+        return pins.analogReadPin(pin)
+    }
+
+
 }
