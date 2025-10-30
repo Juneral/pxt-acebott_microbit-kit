@@ -5,6 +5,13 @@ enum LED {
     OFF = 0
 }
 
+enum RELAY {
+    //% block="ON"
+    ON = 1,
+    //% block="OFF"
+    OFF = 0
+}
+
 enum MyDigitalPin {
     //% block="P0"
     P0 = 100,
@@ -84,10 +91,22 @@ namespace Microbit_Kit {
         return pin;
     }
 
-    //% blockId=SetLed block="LED at %pin| is %status"   group="LED"
+    //% blockId=LED_Module block="LED at %pin| is %status"   group="LED"
     //% pin.shadow=my_digital_pin_shadow
     export function myLED(pin: number, status: LED): void {
         pins.digitalWritePin(pin, status)
+    }
+
+    //% blockId=RGB_Module block="RGB Red %rpin %rv Green %gpin %gv Blue %bpin %bv"   group="RGB"
+    //% rpin.shadow=my_digital_pin_shadow
+    //% gpin.shadow=my_digital_pin_shadow
+    //% bpin.shadow=my_digital_pin_shadow
+    //% rv min=0 max=255
+    //% inlineInput=1
+    export function myRGB(rpin: number, rv: number, gpin: number, gv: number, bpin: number, bv: number): void {
+        pins.analogWritePin(rpin, rv)
+        pins.analogWritePin(gpin, gv)
+        pins.analogWritePin(bpin, bv)
     }
 
     //% blockId=Button block="Button at %pin| is pressed" 
@@ -138,4 +157,12 @@ namespace Microbit_Kit {
     export function myInfrared_Obstacle_Avoidance_Sensor(pin: number): boolean {
         return pins.digitalReadPin(pin) == 0 ? true : false;
     }
+
+    //% blockId=Relay block="Relay at %pin| is %status"   group="Relay"
+    //% pin.shadow=my_digital_pin_shadow
+    export function myRelay(pin: number, status: RELAY): void {
+        pins.digitalWritePin(pin, status)
+    }
+
+    
 }
