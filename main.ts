@@ -92,20 +92,24 @@ namespace Microbit_Kit {
     }
 
     //% blockId=LED_Module block="LED at %pin| is %status"   group="LED"
-    //% pin.shadow=my_digital_pin_shadow
-    export function myLED(pin: number, status: LED): void {
+    //% pin.fieldEditor=pinpicker
+    //% pin.fieldOptions.columns=4
+    export function myLED(pin: MyDigitalPin, status: LED): void {
         pins.digitalWritePin(pin, status)
     }
 
     //% blockId=RGB_Module block="RGB Red %rpin %rv Green %gpin %gv Blue %bpin %bv"   group="RGB"
-    //% rpin.shadow=my_digital_pin_shadow
-    //% gpin.shadow=my_digital_pin_shadow
-    //% bpin.shadow=my_digital_pin_shadow
+    //% rpin.fieldEditor=pinpicker
+    //% rpin.fieldOptions.columns=4
+    //% gpin.fieldEditor=pinpicker
+    //% gpin.fieldOptions.columns=4
+    //% bpin.fieldEditor=pinpicker
+    //% bpin.fieldOptions.columns=4
     //% rv.min=0 rv.max=1023
     //% gv.min=0 gv.max=1023
     //% bv.min=0 bv.max=1023
     //% inlineInputMode=inline
-    export function myRGB(rpin: number, rv: number, gpin: number, gv: number, bpin: number, bv: number): void {
+    export function myRGB(rpin: MyDigitalPin, rv: number, gpin: MyDigitalPin, gv: number, bpin: MyDigitalPin, bv: number): void {
         pins.analogWritePin(rpin, rv)
         pins.analogWritePin(gpin, gv)
         pins.analogWritePin(bpin, bv)
@@ -113,8 +117,9 @@ namespace Microbit_Kit {
 
     //% blockId=Button block="Button at %pin is pressed" 
     //% group="Button"
-    //% pin.shadow=my_digital_pin_shadow
-    export function myButton(pin: number): boolean {
+    //% pin.fieldEditor=pinpicker
+    //% pin.fieldOptions.columns=4
+    export function myButton(pin: MyDigitalPin): boolean {
         pins.setPull(pin, PinPullMode.PullUp)
         return pins.digitalReadPin(pin) == 0 ? true : false;
     }
@@ -123,7 +128,6 @@ namespace Microbit_Kit {
     //% group="Joystick"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=4
-
     export function myJoystickButton(pin: MyDigitalPin): boolean {
         pins.setPull(pin, PinPullMode.PullUp)
         return pins.digitalReadPin(pin) == 0 ? true : false;
@@ -133,58 +137,64 @@ namespace Microbit_Kit {
     //% group="Joystick"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=3
-    //% pin.fieldOptions.tooltips="false"
-    //% pin.defaultValue=MyAnalogPin.P1
-    //% pin.shadow=my_analog_read_write_pin_shadow
+    //% pin.defl=MyAnalogPin.P1
     export function myJoystick_Y(pin: MyAnalogPin): number {
         return pins.analogReadPin(pin)
     }
 
     //% blockId=Joystick_X block="Joystick X-axis at %pin get value"
     //% group="Joystick"
-    //% pin.shadow=my_analog_read_write_pin_shadow
-    export function myJoystick_X(pin: number): number {
+    //% pin.fieldEditor=pinpicker
+    //% pin.fieldOptions.columns=3
+    //% pin.defl=2000=MyAnalogPin.P0
+    export function myJoystick_X(pin: MyAnalogPin): number {
         return pins.analogReadPin(pin)
     }
 
     //% blockId=Light_Sensor block="Light Sensor at %pin get value"
     //% group="Light Sensor"
-    //% pin.shadow=my_analog_read_write_pin_shadow
-    export function myLightSensor(pin: number): number {
+    //% pin.fieldEditor=pinpicker
+    //% pin.fieldOptions.columns=3
+    export function myLightSensor(pin: MyAnalogPin): number {
         return pins.analogReadPin(pin)
     }
 
     //% blockId=Sound_Sensor block="Sound Sensor at %pin get value"
     //% group="Sound Sensor"
-    //% pin.shadow=my_analog_read_write_pin_shadow
-    export function mySoundSensor(pin: number): number {
+    //% pin.fieldEditor=pinpicker
+    //% pin.fieldOptions.columns=3
+    export function mySoundSensor(pin: MyAnalogPin): number {
         return pins.analogReadPin(pin)
     }
 
     //% blockId=Tilt_Sensor block="Tilt Sensor at %pin is tilted" 
     //% group="Tilt Sensor"
-    //% pin.shadow=my_digital_pin_shadow
-    export function myTiltSensor(pin: number): boolean {
+    //% pin.fieldEditor=pinpicker
+    //% pin.fieldOptions.columns=4
+    export function myTiltSensor(pin: MyDigitalPin): boolean {
         return pins.digitalReadPin(pin) == 1 ? true : false;
     }
 
     //% blockId=Soil_Moisture_Sensor_Digital block="Soil Moisture Sensor at %pin digital value"
     //% group="Soil Moisture Sensor"
-    //% pin.shadow=my_digital_pin_shadow
-    export function mySoilMoistureSensor_digitalValue(pin: number): boolean {
+    //% pin.fieldEditor=pinpicker
+    //% pin.fieldOptions.columns=4
+    export function mySoilMoistureSensor_digitalValue(pin: MyDigitalPin): boolean {
         return pins.digitalReadPin(pin) == 1 ? true : false;
     }
 
     //% blockId=Soil_Moisture_Sensor_Analog block="Soil Moisture Sensor at %pin analog value"
     //% group="Soil Moisture Sensor"
-    //% pin.shadow=my_analog_read_write_pin_shadow
-    export function mySoilMoistureSensor_analogValue(pin: number): number {
+    //% pin.fieldEditor=pinpicker
+    //% pin.fieldOptions.columns=3
+    export function mySoilMoistureSensor_analogValue(pin: MyAnalogPin): number {
         return pins.analogReadPin(pin)
     }
 
     //% blockId=Infrared_Obstacle_Avoidance_Sensor block="Infrared Obstacle Avoidance Sensor at %pin digital value"
     //% group="Infrared Obstacle Avoidance Sensor"
-    //% pin.shadow=my_digital_pin_shadow
+    //% pin.fieldEditor=pinpicker
+    //% pin.fieldOptions.columns=4
     export function myInfrared_Obstacle_Avoidance_Sensor(pin: number): boolean {
         return pins.digitalReadPin(pin) == 0 ? true : false;
     }
