@@ -146,7 +146,7 @@ namespace Microbit_Kit {
     //% group="Joystick"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=3
-    //% pin.defl=2000=MyAnalogPin.P0
+    //% pin.defl=MyAnalogPin.P0
     export function myJoystick_X(pin: MyAnalogPin): number {
         return pins.analogReadPin(pin)
     }
