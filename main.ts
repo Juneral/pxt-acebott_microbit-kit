@@ -101,8 +101,10 @@ namespace Microbit_Kit {
     //% rpin.shadow=my_digital_pin_shadow
     //% gpin.shadow=my_digital_pin_shadow
     //% bpin.shadow=my_digital_pin_shadow
-    //% rv min=0 max=255
-    //% inlineInput=1
+    //% rv.min=0 rv.max=1023
+    //% gv.min=0 gv.max=1023
+    //% bv.min=0 bv.max=1023
+    //% inlineInputMode=inline
     export function myRGB(rpin: number, rv: number, gpin: number, gv: number, bpin: number, bv: number): void {
         pins.analogWritePin(rpin, rv)
         pins.analogWritePin(gpin, gv)
