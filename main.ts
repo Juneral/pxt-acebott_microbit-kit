@@ -111,60 +111,91 @@ namespace Microbit_Kit {
         pins.analogWritePin(bpin, bv)
     }
 
-    //% blockId=Button block="Button at %pin| is pressed" 
+    //% blockId=Button block="Button at %pin is pressed" 
     //% group="Button"
     //% pin.shadow=my_digital_pin_shadow
     export function myButton(pin: number): boolean {
+        pins.setPull(pin, PinPullMode.PullUp)
         return pins.digitalReadPin(pin) == 0 ? true : false;
     }
 
-    //% blockId=Light_Sensor block="Light Sensor at %pin| get value"
+    //% blockId=Joystick_Button block="Joystick button at %pin is pressed"
+    //% group="Joystick"
+    //% pin.fieldEditor=pinpicker
+    //% pin.fieldOptions.columns=4
+
+    export function myJoystickButton(pin: MyDigitalPin): boolean {
+        pins.setPull(pin, PinPullMode.PullUp)
+        return pins.digitalReadPin(pin) == 0 ? true : false;
+    }
+
+    //% blockId=Joystick_Y block="Joystick Y-axis at %pin get value"
+    //% group="Joystick"
+    //% pin.fieldEditor=pinpicker
+    //% pin.fieldOptions.columns=3
+    //% pin.fieldOptions.tooltips="false"
+    //% pin.defaultValue=MyAnalogPin.P1
+    //% pin.shadow=my_analog_read_write_pin_shadow
+    export function myJoystick_Y(pin: MyAnalogPin): number {
+        return pins.analogReadPin(pin)
+    }
+
+    //% blockId=Joystick_X block="Joystick X-axis at %pin get value"
+    //% group="Joystick"
+    //% pin.shadow=my_analog_read_write_pin_shadow
+    export function myJoystick_X(pin: number): number {
+        return pins.analogReadPin(pin)
+    }
+
+    //% blockId=Light_Sensor block="Light Sensor at %pin get value"
     //% group="Light Sensor"
     //% pin.shadow=my_analog_read_write_pin_shadow
     export function myLightSensor(pin: number): number {
         return pins.analogReadPin(pin)
     }
 
-    //% blockId=Sound_Sensor block="Sound Sensor at %pin| get value"
+    //% blockId=Sound_Sensor block="Sound Sensor at %pin get value"
     //% group="Sound Sensor"
     //% pin.shadow=my_analog_read_write_pin_shadow
     export function mySoundSensor(pin: number): number {
         return pins.analogReadPin(pin)
     }
 
-    //% blockId=Tilt_Sensor block="Tilt Sensor at %pin| is tilted" 
+    //% blockId=Tilt_Sensor block="Tilt Sensor at %pin is tilted" 
     //% group="Tilt Sensor"
     //% pin.shadow=my_digital_pin_shadow
     export function myTiltSensor(pin: number): boolean {
         return pins.digitalReadPin(pin) == 1 ? true : false;
     }
 
-    //% blockId=Soil_Moisture_Sensor_Digital block="Soil Moisture Sensor at %pin| digital value"
+    //% blockId=Soil_Moisture_Sensor_Digital block="Soil Moisture Sensor at %pin digital value"
     //% group="Soil Moisture Sensor"
     //% pin.shadow=my_digital_pin_shadow
     export function mySoilMoistureSensor_digitalValue(pin: number): boolean {
         return pins.digitalReadPin(pin) == 1 ? true : false;
     }
 
-    //% blockId=Soil_Moisture_Sensor_Analog block="Soil Moisture Sensor at %pin| analog value"
+    //% blockId=Soil_Moisture_Sensor_Analog block="Soil Moisture Sensor at %pin analog value"
     //% group="Soil Moisture Sensor"
     //% pin.shadow=my_analog_read_write_pin_shadow
     export function mySoilMoistureSensor_analogValue(pin: number): number {
         return pins.analogReadPin(pin)
     }
 
-    //% blockId=Infrared_Obstacle_Avoidance_Sensor block="Infrared Obstacle Avoidance Sensor at %pin| digital value"
+    //% blockId=Infrared_Obstacle_Avoidance_Sensor block="Infrared Obstacle Avoidance Sensor at %pin digital value"
     //% group="Infrared Obstacle Avoidance Sensor"
     //% pin.shadow=my_digital_pin_shadow
     export function myInfrared_Obstacle_Avoidance_Sensor(pin: number): boolean {
         return pins.digitalReadPin(pin) == 0 ? true : false;
     }
 
-    //% blockId=Relay block="Relay at %pin| is %status"   group="Relay"
+    //% blockId=Relay block="Relay at %pin is %status"   group="Relay"
     //% pin.shadow=my_digital_pin_shadow
     export function myRelay(pin: number, status: RELAY): void {
         pins.digitalWritePin(pin, status)
     }
+
+
 
     
 }
