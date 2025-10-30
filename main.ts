@@ -12,6 +12,13 @@ enum RELAY {
     OFF = 0
 }
 
+enum DistanceUnit {
+    //% block="cm"
+    CM = 0,
+    //% block="inch"
+    INCH = 1
+}
+
 enum MyDigitalPin {
     //% block="P0"
     P0 = 100,
@@ -88,6 +95,9 @@ namespace Microbit_Kit {
     //% rv.min=0 rv.max=1023
     //% gv.min=0 gv.max=1023
     //% bv.min=0 bv.max=1023
+    //% rpin.defl=MyAnalogPin.P0
+    //% gpin.defl=MyAnalogPin.P1
+    //% bpin.defl=MyAnalogPin.P2
     //% inlineInputMode=inline
     export function myRGB(rpin: MyDigitalPin, rv: number, gpin: MyDigitalPin, gv: number, bpin: MyDigitalPin, bv: number): void {
         pins.analogWritePin(rpin, rv)
@@ -108,6 +118,7 @@ namespace Microbit_Kit {
     //% group="Joystick"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=4
+    //% pin.defl=MyAnalogPin.P2
     export function myJoystickButton(pin: MyDigitalPin): boolean {
         pins.setPull(pin, PinPullMode.PullUp)
         return pins.digitalReadPin(pin) == 0 ? true : false;
@@ -186,7 +197,40 @@ namespace Microbit_Kit {
         pins.digitalWritePin(pin, status)
     }
 
+    //% blockId=Ultrasonic_Sensor block="Ultrasonic Sensor ECHO at %epin TRIG at is %tpin get distance in %unit"
+    //% group="Ultrasonic Sensor"
+    //% epin.fieldEditor=pinpicker
+    //% epin.fieldOptions.columns=4
+    //% tpin.fieldEditor=pinpicker
+    //% tpin.fieldOptions.columns=4
+    //% epin.defl=MyDigitalPin.P0
+    //% tpin.defl=MyDigitalPin.P1
+    export function UltrasonicDistance(epin: MyDigitalPin, tpin: MyDigitalPin, unit: DistanceUnit): number {
+        // send pulse
+        pins.setPull(tpin, PinPullMode.PullNone)
+        pins.digitalWritePin(tpin, 0)
+        control.waitMicros(2)
+        pins.digitalWritePin(tpin, 1)
+        control.waitMicros(10)
+        pins.digitalWritePin(tpin, 0)
 
+        // read pulse
+        let d = pins.pulseIn(epin, PulseValue.High)
+        let distance = d / 58
 
-    
+        if (distance > 500) {
+            distance = 500
+        }
+
+        switch (unit) {
+            case 0:
+                return Math.floor(distance)  //cm
+                break
+            case 1:
+                return Math.floor(distance / 254)   //inch
+                break
+            default:
+                return 500
+        }
+    } 
 }
