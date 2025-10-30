@@ -1,25 +1,44 @@
-enum LED {
+const enum LED {
     //% block="ON"
     ON = 1,
     //% block="OFF"
     OFF = 0
 }
 
-enum RELAY {
+const enum RELAY {
     //% block="ON"
     ON = 1,
     //% block="OFF"
     OFF = 0
 }
 
-enum DistanceUnit {
+const enum DistanceUnit {
     //% block="cm"
     CM = 0,
     //% block="inch"
     INCH = 1
 }
 
-enum MyDigitalPin {
+const enum CharIndex {
+    //% block="1"
+    C1 = 0,
+    //% block="2"
+    C2 = 1,
+    //% block="3"
+    C3 = 2,
+    //% block="4"
+    C4 = 3,
+    //% block="5"
+    C5 = 4,
+    //% block="6"
+    C6 = 5,
+    //% block="7"
+    C7 = 6,
+    //% block="8"
+    C8 = 7
+}
+
+const enum MyDigitalPin {
     //% block="P0"
     P0 = 100,
     //% block="P1"
@@ -60,7 +79,7 @@ enum MyDigitalPin {
     P20 = 120,
 }
 
-enum MyAnalogPin {
+const enum MyAnalogPin {
     //% block="P0"
     P0 = 100,
     //% block="P1"
@@ -118,7 +137,7 @@ namespace Microbit_Kit {
     //% group="Joystick"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=4
-    //% pin.defl=MyAnalogPin.P2
+    //% pin.defl=MyDigitalPin.P2
     export function myJoystickButton(pin: MyDigitalPin): boolean {
         pins.setPull(pin, PinPullMode.PullUp)
         return pins.digitalReadPin(pin) == 0 ? true : false;
@@ -233,4 +252,156 @@ namespace Microbit_Kit {
                 return 500
         }
     } 
+
+    // LCD1602 @start
+    let i2cAddr: number // 0x27: PCF8574
+    let BK: number      // backlight control
+    let RS: number      // command/data
+    let Custom_Char: number[][] = []
+
+    // set LCD reg
+    function setreg(d: number) {
+        pins.i2cWriteNumber(i2cAddr, d, NumberFormat.Int8LE)
+        basic.pause(1)
+    }
+
+    // send data to I2C bus
+    function set(d: number) {
+        d = d & 0xF0
+        d = d + BK + RS
+        setreg(d)
+        setreg(d + 4)
+        setreg(d)
+    }
+
+    // send command
+    function cmd(d: number) {
+        RS = 0
+        set(d)
+        set(d << 4)
+    }
+
+    // send data
+    function dat(d: number) {
+        RS = 1
+        set(d)
+        set(d << 4)
+    }
+
+    //% blockId="LCD1602_Clear" block="LCD1602 clear screen"
+    //% group="LCD1602"
+    export function LCD1602_Clear(): void {
+        cmd(0x01)
+    }
+
+    //% blockId="LCD1602_shl" block="LCD1602 shift left"
+    //% group="LCD1602"
+    export function LCD1602_shl(): void {
+        cmd(0x18)
+    }
+
+    //% blockId="LCD1602_shr" block="LCD1602 shift right"
+    //% group="LCD1602"
+    export function LCD1602_shr(): void {
+        cmd(0x1C)
+    }
+
+    //% blockId="LCD1602_Makecharacter"
+    //% block="LCD1602 create custom character %char_index|%im"
+    //% group="LCD1602"
+    export function LCD1602_CreateCharacter(char_index: CharIndex, im: Image): void {
+        const customChar = [0, 0, 0, 0, 0, 0, 0, 0];
+        for (let y = 0; y < 8; y++) {
+            for (let x = 0; x < 5; x++) {
+                if (im.pixel(x, y)) {
+                    customChar[y] |= 1 << (4 - x)
+                }
+            }
+        }
+        Custom_Char[char_index] = customChar;
+    }
+
+    //% blockId="LCD1602_Characterpixels"
+    //% block="Custom character"
+    //% imageLiteral=1
+    //% imageLiteralColumns=5
+    //% imageLiteralRows=8
+    //% imageLiteralScale=0.6
+    //% shim=images::createImage
+    //% group="LCD1602"
+    export function LCD1602_CharacterPixels(i: string): Image {
+        return <Image><any>i;
+    }
+
+
+    //% blockId="LCD1602_Showchararacter"
+    //% block="LCD1602 at (x:|%x|,y:|%y) show custom character|%char_index"
+    //% x.min=0 x.max=15
+    //% y.min=0 y.max=1
+    //% group="LCD1602"
+    export function LCD1602_Showchararacter(x: number, y: number, char_index: CharIndex): void {
+        let a: number
+        if (y > 0)
+            a = 0xC0
+        else
+            a = 0x80
+        a += x
+        cmd(0x40 | (char_index << 3));
+        for (let y = 0; y < 8; y++) {
+            dat(Custom_Char[char_index][y]);
+        }
+        cmd(a)
+        dat(char_index)
+
+    }
+
+    //% blockId="LCD1602_ShowString" block="LCD1602 at (x:|%x|,y:|%y) show string|%s|"
+    //% x.min=0 x.max=15
+    //% y.min=0 y.max=1
+    //% s.defl="Hello,Acebott!"
+    //% group="LCD1602"
+    export function LCD1602_ShowString(x: number, y: number, s: string): void {
+        let a: number
+
+        if (y > 0)
+            a = 0xC0
+        else
+            a = 0x80
+        a += x
+        cmd(a)
+
+        for (let i = 0; i < s.length; i++) {
+            dat(s.charCodeAt(i))
+        }
+    }
+
+    //% blockId="LCD16202_ShowNumber" block="LCD1602 at (x:|%x|,y:|%y) show number|%n|"
+    //% x.min=0 x.max=15
+    //% y.min=0 y.max=1
+    //% group="LCD1602"
+    export function LCD1602_ShowNumber(x: number, y: number, n: number): void {
+        let s = n.toString()
+        LCD1602_ShowString(x, y, s)
+    }
+
+    //% blockId="LCD1602_Init" block="LCD1602 initialization"
+    //% group="LCD1602"
+    export function LCD1602_Init(): void {
+        i2cAddr = 39
+        BK = 8
+        RS = 0
+        cmd(0x33)       // set 4bit mode
+        basic.pause(5)
+        set(0x30)
+        basic.pause(5)
+        set(0x20)
+        basic.pause(5)
+        cmd(0x28)       // set mode
+        cmd(0x0C)
+        cmd(0x06)
+        cmd(0x01)       // clear
+    }
+  // LCD1602 @end
+
+
 }
