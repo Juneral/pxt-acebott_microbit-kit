@@ -70,27 +70,7 @@ enum MyAnalogPin {
 
 //% color="#31C7D5" weight=10 icon="\uf2db"
 namespace Microbit_Kit {
-
-    //% blockId=my_digital_pin_shadow
-    //% block="$pin"
-    //% pin.fieldEditor=pinpicker
-    //% pin.fieldOptions.columns=4
-    //% pin.fieldOptions.tooltips="false"
-    //% blockHidden=1
-    export function _digitalPinShadow(pin: MyDigitalPin): number {
-        return pin;
-    }
-
-    //% blockId=my_analog_read_write_pin_shadow
-    //% block="$pin"
-    //% pin.fieldEditor=pinpicker
-    //% pin.fieldOptions.columns=3
-    //% pin.fieldOptions.tooltips="false"
-    //% blockHidden=1
-    export function _analogReadWritePinShadow(pin: MyAnalogPin): number {
-        return pin;
-    }
-
+    
     //% blockId=LED_Module block="LED at %pin| is %status"   group="LED"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=4
@@ -195,13 +175,14 @@ namespace Microbit_Kit {
     //% group="Infrared Obstacle Avoidance Sensor"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=4
-    export function myInfrared_Obstacle_Avoidance_Sensor(pin: number): boolean {
+    export function myInfrared_Obstacle_Avoidance_Sensor(pin: MyDigitalPin): boolean {
         return pins.digitalReadPin(pin) == 0 ? true : false;
     }
 
     //% blockId=Relay block="Relay at %pin is %status"   group="Relay"
-    //% pin.shadow=my_digital_pin_shadow
-    export function myRelay(pin: number, status: RELAY): void {
+    //% pin.fieldEditor=pinpicker
+    //% pin.fieldOptions.columns=4
+    export function myRelay(pin: MyDigitalPin, status: RELAY): void {
         pins.digitalWritePin(pin, status)
     }
 
