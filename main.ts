@@ -576,6 +576,7 @@ namespace Microbit_Kit {
      */
     //% block="pixel at x $x y $y"
     //% weight=95
+    //% inlineInputMode=inline
     export function px(x: number, y: number): boolean {
         const index = Math.round(Math.floor(y / 8) * 128 + x + 1)
         if ((index < 1025) && (index > -1) && (x < 128) && (x > -1) && (y > -1) && (y < 64)) {
@@ -599,6 +600,7 @@ namespace Microbit_Kit {
     //% color.defl=true
     //% toggle.defl=false
     //% weight=94
+    //% inlineInputMode=inline
     export function drawText(text: string, x: number, y: number, color: boolean, toggle: boolean): void {
         const font = [
             [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
@@ -749,6 +751,7 @@ namespace Microbit_Kit {
     //% fill.defl=false
     //% toggle.defl=false
     //% weight=93
+    //% inlineInputMode=inline
     export function drawRect(x1: number, y1: number, x2: number, y2: number, color: boolean, fill: boolean, toggle: boolean): void {
         if (fill) {
             for (let x = x1; x <= x2; x++) {
@@ -807,6 +810,7 @@ namespace Microbit_Kit {
     //% color.defl=true
     //% toggle.defl=false
     //% weight=92
+    //% inlineInputMode=inline
     export function drawLine(x1: number, y1: number, x2: number, y2: number, color: boolean, toggle: boolean): void {
         const line = []
         const dx = Math.abs(x2 - x1)
