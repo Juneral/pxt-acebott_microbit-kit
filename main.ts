@@ -951,7 +951,7 @@ namespace Microbit_Kit {
     //% advanced=true
     //% weight=88
     //% shim=images::createImage
-    //% imageLiteral=1 imageLiteralRows=11 imageLiteralColumns=8
+    //% imageLiteral=1 imageLiteralRows=8 imageLiteralColumns=8
     export function charImage(leds: string): Image {
         return <Image><any>leds
     }
