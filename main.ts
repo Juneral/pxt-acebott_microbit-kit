@@ -1034,5 +1034,41 @@ namespace Microbit_Kit {
         return T;
     }
 
+    // Color Sensor V2.0
+    let BH1745ColorInit = false;
+    let BH1745: BH1745NUC;
+    //% blockId=Color_Sensor_Update block="Color Sensor update value"
+    //% subcategory=Sensor group=I2C weight=53 color=#49CEF7
+    export function Color_Sensor_Update(): void {
+        if (!BH1745ColorInit) {
+            BH1745 = new BH1745NUC()
+            BH1745ColorInit = true
+        }
+        BH1745.update()
+    }
+
+
+    export enum colorType {
+        //% block="red"
+        Red = 0,
+        //% block="green"
+        Green = 1,
+        //% block="blue"
+        Blue = 2,
+        //% block="hue"
+        Hue = 3,
+    }
+
+    //% blockId=Color_Sensor_getValue block="Color Sensor get %type value"
+    //% subcategory=Sensor group=I2C weight=52 color=#49CEF7
+    export function ColorSensor_getValue(type: colorType): number {
+        if (!BH1745ColorInit) {
+            BH1745 = new BH1745NUC()
+            BH1745ColorInit = true
+        }
+        return BH1745.getValue(type)
+    }
+
+
     
 }
