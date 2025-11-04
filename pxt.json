@@ -10,7 +10,8 @@
     "files": [
         "README.md",
         "main.ts",
-        "BH1745NUC.ts"
+        "BH1745NUC.ts",
+        "SH1106.ts"
     ],
     "testFiles": [
         "test.ts"
