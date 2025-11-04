@@ -457,6 +457,7 @@ namespace Microbit_Kit {
      * Initialize SH1106 OLED display, this command must be called at the start of the program.
      */
     //% block="init SH1106 OLED display"
+    //% group="1.3 inch OLED"
     //% weight=101
     export function init(): void {
         screen = pins.createBuffer(1025)
@@ -488,6 +489,7 @@ namespace Microbit_Kit {
      * @param contrast contrast level, eg: 128
      */
     //% block="set contrast $contrast"
+    //% group="1.3 inch OLED"
     //% contrast.defl=128
     //% contrast.min=0
     //% contrast.max=255
@@ -502,6 +504,7 @@ namespace Microbit_Kit {
      * @param color filling color (usually `false`)
      */
     //% block="clear $color"
+    //% group="1.3 inch OLED"
     //% color.defl=false
     //% weight=99
     export function clear(color: boolean): void {
@@ -513,6 +516,7 @@ namespace Microbit_Kit {
      * This command must be called whenever you want to show something on the OLED display.
      */
     //% block="draw"
+    //% group="1.3 inch OLED"
     //% weight=98
     export function draw(): void {
         // SH1106 requires page-by-page writing with column address setting
@@ -545,6 +549,7 @@ namespace Microbit_Kit {
      * @param color color of pixel
      */
     //% block="set pixel at x $x y $y to $color"
+    //% group="1.3 inch OLED"
     //% color.defl=true
     //% weight=97
     export function setPx(x: number, y: number, color: boolean): void {
@@ -561,6 +566,7 @@ namespace Microbit_Kit {
      * @param y coordinate y (increases downwards)
      */
     //% block="toggle pixel at x $x y $y"
+    //% group="1.3 inch OLED"
     //% weight=96
     export function togglePx(x: number, y: number): void {
         const index = Math.round(Math.floor(y / 8) * 128 + x + 1)
@@ -575,6 +581,7 @@ namespace Microbit_Kit {
      * @param y coordinate y (increases downwards)
      */
     //% block="pixel at x $x y $y"
+    //% group="1.3 inch OLED"
     //% weight=95
     //% inlineInputMode=inline
     export function px(x: number, y: number): boolean {
@@ -597,6 +604,7 @@ namespace Microbit_Kit {
      * @param toggle sets whether to use pixel switching instead of setting the pixel to a specific color (if `true`, `color` means nothing)
      */
     //% block="draw text $text at|x $x|y $y|color $color|toggle $toggle"
+    //% group="1.3 inch OLED"
     //% color.defl=true
     //% toggle.defl=false
     //% weight=94
@@ -747,6 +755,7 @@ namespace Microbit_Kit {
      * @param toggle sets whether to use pixel switching instead of setting the pixel to a specific color (if `true`, `color` means nothing)
      */
     //% block="draw rect at|x1 $x1|y1 $y1|x2 $x2|y2 $y2|color $color|fill $fill|toggle $toggle"
+    //% group="1.3 inch OLED"
     //% color.defl=true
     //% fill.defl=false
     //% toggle.defl=false
@@ -807,6 +816,7 @@ namespace Microbit_Kit {
      * @param toggle sets whether to use pixel switching instead of setting the pixel to a specific color (if `true`, `color` means nothing)
      */
     //% block="draw line from|x $x1|y $y1|to|x $x2|y $y2|color $color|toggle $toggle"
+    //% group="1.3 inch OLED"
     //% color.defl=true
     //% toggle.defl=false
     //% weight=92
@@ -853,6 +863,7 @@ namespace Microbit_Kit {
      * @param toggle sets whether to use pixel switching instead of setting the pixel to a specific color (if `true`, `color` means nothing)
      */
     //% block="draw image|$image|x $x|y $y|color $color|background $bg|toggle $toggle"
+    //% group="1.3 inch OLED"
     //% color.defl=true
     //% bg.defl=false
     //% toggle.defl=false
@@ -910,7 +921,8 @@ namespace Microbit_Kit {
     /**
      * Create image for `add character` function.
      */
-    //% block="character image"
+    //% block="character image" 
+    //% group="1.3 inch OLED"
     //% advanced=true
     //% weight=88
     //% shim=images::createImage
@@ -929,6 +941,7 @@ namespace Microbit_Kit {
     //% comScanDirection.defl=false
     //% weight=83
     //% advanced=true
+    //% group="1.3 inch OLED"
     export function setOrientation(segmentRemap: boolean, comScanDirection: boolean): void {
         cmd1(segmentRemap ? 0xA1 : 0xA0)
         cmd1(comScanDirection ? 0xC8 : 0xC0)
