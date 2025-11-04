@@ -441,15 +441,13 @@ namespace Microbit_Kit {
         OLED.init()
     }
 
-    //% blockId=OLED_ClearScreen block="OLED Clear Screen to %"
+    //% blockId=OLED_ClearScreen block="OLED Clear Screen to %color"
     //% group="1.3 inch OLED"
-    export function OLED_ClearScreen(): void {
-        if (!OLEDInit) {
-            OLED = new SH1106()
-            OLEDInit = true
-        }
-        OLED.init()
+    export function OLED_ClearScreen(color: boolean): void {
+        OLED.clearScreen(color)
     }
+
+    
 
 
 

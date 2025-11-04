@@ -1,77 +1,78 @@
 // SH1106 OLED驱动 (128x64)
-const SH1106_ADDR = 0x3C
-let screen = pins.createBuffer(1025) // 128x64 / 8 = 1024 + 1 command byte
-let charset: number[][] = []
-let charsetIndex: string[] = []
-
-// SH1106 command functions
-function cmd1(cmd1: number): void {
-    let buffer = pins.createBuffer(2)
-    buffer[0] = 0x00  // Co=0, D/C=0
-    buffer[1] = cmd1
-    pins.i2cWriteBuffer(SH1106_ADDR, buffer)
-}
-
-function cmd2(cmd1: number, cmd2: number): void {
-    let buffer = pins.createBuffer(3)
-    buffer[0] = 0x00
-    buffer[1] = cmd1
-    buffer[2] = cmd2
-    pins.i2cWriteBuffer(SH1106_ADDR, buffer)
-}
-
-function cmd3(cmd1: number, cmd2: number, cmd3: number): void {
-    let buffer = pins.createBuffer(4)
-    buffer[0] = 0x00
-    buffer[1] = cmd1
-    buffer[2] = cmd2
-    buffer[3] = cmd3
-    pins.i2cWriteBuffer(SH1106_ADDR, buffer)
-}
-
-function showbit(bit: number, shift: number): number {
-    if (bit & (1 << shift)) { }
-    else {
-        bit += 1 << shift
-    }
-    return bit
-}
-
-function hidebit(bit: number, shift: number): number {
-    if (bit & (1 << shift)) {
-        bit -= 1 << shift
-    }
-    return bit
-}
-
-function getbit(bits: number, shift: number): number {
-    return (bits >> shift) & 1;
-}
-
 class SH1106{
+
+    SH1106_ADDR : 0x3C
+    screen : Buffer
+    charset: number[][]
+    charsetIndex: string[]
+
+    // SH1106 command functions
+    cmd1(cmd1: number): void {
+        let buffer = pins.createBuffer(2)
+        buffer[0] = 0x00  // Co=0, D/C=0
+        buffer[1] = cmd1
+        pins.i2cWriteBuffer(this.SH1106_ADDR, buffer)
+    }
+
+    cmd2(cmd1: number, cmd2: number): void {
+        let buffer = pins.createBuffer(3)
+        buffer[0] = 0x00
+        buffer[1] = cmd1
+        buffer[2] = cmd2
+        pins.i2cWriteBuffer(this.SH1106_ADDR, buffer)
+    }
+
+    cmd3(cmd1: number, cmd2: number, cmd3: number): void {
+        let buffer = pins.createBuffer(4)
+        buffer[0] = 0x00
+        buffer[1] = cmd1
+        buffer[2] = cmd2
+        buffer[3] = cmd3
+        pins.i2cWriteBuffer(this.SH1106_ADDR, buffer)
+    }
+
+    showbit(bit: number, shift: number): number {
+        if (bit & (1 << shift)) { }
+        else {
+            bit += 1 << shift
+        }
+        return bit
+    }
+
+    hidebit(bit: number, shift: number): number {
+        if (bit & (1 << shift)) {
+            bit -= 1 << shift
+        }
+        return bit
+    }
+
+    getbit(bits: number, shift: number): number {
+        return (bits >> shift) & 1;
+    }
+
     /**
      * Initialize SH1106 OLED display, this command must be called at the start of the program.
      */
     init(): void {
-        screen = pins.createBuffer(1025)
+        this.screen = pins.createBuffer(1025)
 
         // SH1106 initialization sequence
-        cmd1(0xAE)       // Display OFF
-        cmd1(0xA4)       // Display follows RAM content
-        cmd2(0xD5, 0x80) // Set display clock divide ratio/oscillator frequency
-        cmd2(0xA8, 0x3F) // Set multiplex ratio (1 to 64)
-        cmd2(0xD3, 0x00) // Set display offset
-        cmd1(0x40)       // Set display start line
-        cmd2(0x8D, 0x14) // Enable charge pump regulator
-        cmd2(0x20, 0x00) // Set memory addressing mode to horizontal
-        cmd1(0xA0)       // Set segment re-map
-        cmd1(0xC0)       // Set COM output scan direction
-        cmd2(0xDA, 0x12) // Set COM pins hardware configuration
-        cmd2(0x81, 0x80) // Set contrast control
-        cmd2(0xD9, 0x22) // Set pre-charge period
-        cmd2(0xDB, 0x20) // Set VCOMH deselect level
-        cmd1(0xA6)       // Set normal display (not inverted)
-        cmd1(0xAF)       // Display ON
+        this.cmd1(0xAE)       // Display OFF
+        this.cmd1(0xA4)       // Display follows RAM content
+        this.cmd2(0xD5, 0x80) // Set display clock divide ratio/oscillator frequency
+        this.cmd2(0xA8, 0x3F) // Set multiplex ratio (1 to 64)
+        this.cmd2(0xD3, 0x00) // Set display offset
+        this.cmd1(0x40)       // Set display start line
+        this.cmd2(0x8D, 0x14) // Enable charge pump regulator
+        this.cmd2(0x20, 0x00) // Set memory addressing mode to horizontal
+        this.cmd1(0xA0)       // Set segment re-map
+        this.cmd1(0xC0)       // Set COM output scan direction
+        this.cmd2(0xDA, 0x12) // Set COM pins hardware configuration
+        this.cmd2(0x81, 0x80) // Set contrast control
+        this.cmd2(0xD9, 0x22) // Set pre-charge period
+        this.cmd2(0xDB, 0x20) // Set VCOMH deselect level
+        this.cmd1(0xA6)       // Set normal display (not inverted)
+        this.cmd1(0xAF)       // Display ON
         this.clearScreen(false)
         this.setOrientation(true, true)
         this.refresh()
@@ -82,7 +83,7 @@ class SH1106{
      * @param contrast contrast level, eg: 128
      */
     setContrast(contrast: number): void {
-        cmd2(0x81, contrast)
+        this.cmd2(0x81, contrast)
     }
 
     /**
@@ -91,7 +92,7 @@ class SH1106{
      * @param color filling color (usually `false`)
      */
     clearScreen(color: boolean): void {
-        screen.fill((color) ? 0xFF : 0)
+        this.screen.fill((color) ? 0xFF : 0)
     }
 
     /**
@@ -102,11 +103,11 @@ class SH1106{
         // SH1106 requires page-by-page writing with column address setting
         for (let page = 0; page < 8; page++) {
             // Set page address
-            cmd1(0xB0 + page)
+            this.cmd1(0xB0 + page)
             // Set lower column address (start at 2 for 128x64 displays to center the image)
-            cmd1(0x02)
+            this.cmd1(0x02)
             // Set higher column address
-            cmd1(0x10)
+            this.cmd1(0x10)
 
             // Prepare data buffer for this page (128 bytes + 1 command byte)
             let pageBuffer = pins.createBuffer(129)
@@ -114,10 +115,10 @@ class SH1106{
 
             // Copy page data from screen buffer
             for (let col = 0; col < 128; col++) {
-                pageBuffer[col + 1] = screen[page * 128 + col + 1]
+                pageBuffer[col + 1] = this.screen[page * 128 + col + 1]
             }
 
-            pins.i2cWriteBuffer(SH1106_ADDR, pageBuffer)
+            pins.i2cWriteBuffer(this.SH1106_ADDR, pageBuffer)
         }
     }
 
@@ -131,7 +132,7 @@ class SH1106{
     setPixel(x: number, y: number, color: boolean): void {
     const index = Math.round(Math.floor(y / 8) * 128 + x + 1)
     if ((index < 1025) && (index > -1) && (x < 128) && (x > -1) && (y > -1) && (y < 64)) {
-        screen[index] = (color) ? showbit(screen[index], (y % 8)) : hidebit(screen[index], (y % 8))
+        this.screen[index] = (color) ? this.showbit(this.screen[index], (y % 8)) : this.hidebit(this.screen[index], (y % 8))
     }
 }
 
@@ -144,7 +145,7 @@ class SH1106{
     togglePixel(x: number, y: number): void {
         const index = Math.round(Math.floor(y / 8) * 128 + x + 1)
         if ((index < 1025) && (index > -1) && (x < 128) && (x > -1) && (y > -1) && (y < 64)) {
-            screen[index] = (!this.getPixel(x, y)) ? showbit(screen[index], (y % 8)) : hidebit(screen[index], (y % 8))
+            this.screen[index] = (!this.getPixel(x, y)) ? this.showbit(this.screen[index], (y % 8)) : this.hidebit(this.screen[index], (y % 8))
         }
     }
 
@@ -157,7 +158,7 @@ class SH1106{
     getPixel(x: number, y: number): boolean {
         const index = Math.round(Math.floor(y / 8) * 128 + x + 1)
         if ((index < 1025) && (index > -1) && (x < 128) && (x > -1) && (y > -1) && (y < 64)) {
-            return getbit(screen[index], (y % 8)) == 1
+            return this.getbit(this.screen[index], (y % 8)) == 1
         } else {
             return false
         }
@@ -277,10 +278,10 @@ class SH1106{
             if (text[i] == '\n') {
                 line++
                 lineStart = i + 1
-            } else if (charsetIndex.indexOf(text[i]) !== -1) {
+            } else if (this.charsetIndex.indexOf(text[i]) !== -1) {
                 for (let j = 0; j < 11; j++) {
                     for (let k = 0; k < 8; k++) {
-                        if (charset[charsetIndex.indexOf(text[i])][j] & (0x01 << k)) {
+                        if (this.charset[this.charsetIndex.indexOf(text[i])][j] & (0x01 << k)) {
                             if (toggle) {
                                 this.togglePixel(x + ((i - lineStart) * 8) + (8 - k), y + (line * 10) + j)
                             } else {
@@ -456,8 +457,8 @@ class SH1106{
                 }
                 compressedChar.push(tmp)
             }
-            charset.unshift(compressedChar)
-            charsetIndex.unshift(char)
+            this.charset.unshift(compressedChar)
+            this.charsetIndex.unshift(char)
         }
     }
 
@@ -476,7 +477,7 @@ class SH1106{
      */
 
     setOrientation(segmentRemap: boolean, comScanDirection: boolean): void {
-        cmd1(segmentRemap ? 0xA1 : 0xA0)
-        cmd1(comScanDirection ? 0xC8 : 0xC0)
+        this.cmd1(segmentRemap ? 0xA1 : 0xA0)
+        this.cmd1(comScanDirection ? 0xC8 : 0xC0)
     }
 }
