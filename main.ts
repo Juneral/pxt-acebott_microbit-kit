@@ -431,20 +431,41 @@ namespace Microbit_Kit {
     let OLEDInit = false;
     let OLED:SH1106;
 
-    //% blockId=OLED_Init block="OLED Init"
+    
+
+    //% blockId=OLED_SetPixel block="OLED set pixel at (%x,%y) to %color"
     //% group="1.3 inch OLED"
-    export function OLED_Init():void{
-        if (!OLEDInit) {
-            OLED = new SH1106()
-            OLEDInit = true
-        }
-        OLED.init()
+    export function OLED_SetPixel(x:number,y:number,color: boolean): void {
+        OLED.setPixel(x,y,color)
+    }
+
+    //% blockId=OLED_refresh block="OLED refresh screen"
+    //% group="1.3 inch OLED"
+    export function OLED_refresh(): void {
+        OLED.refresh()
     }
 
     //% blockId=OLED_ClearScreen block="OLED Clear Screen to %color"
     //% group="1.3 inch OLED"
     export function OLED_ClearScreen(color: boolean): void {
         OLED.clearScreen(color)
+    }
+
+    //% blockId=OLED_SetContrast block="OLED set contrast to %v"
+    //% v.defl=128 v.min=0 v.max=255
+    //% group="1.3 inch OLED"
+    export function OLED_SetContrast(v: number): void {
+        OLED.setContrast(v)
+    }
+
+    //% blockId=OLED_Init block="OLED Init"
+    //% group="1.3 inch OLED"
+    export function OLED_Init(): void {
+        if (!OLEDInit) {
+            OLED = new SH1106()
+            OLEDInit = true
+        }
+        OLED.init()
     }
 
     
