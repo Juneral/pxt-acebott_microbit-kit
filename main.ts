@@ -904,6 +904,47 @@ namespace Microbit_Kit {
     }
 
     /**
+     * Add custom character with specified dimensions
+     * @param image character image
+     * @param char character name
+     * @param width character width in pixels
+     * @param height character height in pixels
+     */
+    //% block="add custom character $char $image|width $width|height $height"
+    //% advanced=true
+    //% weight=89
+    //% width.min=1 width.max=16 width.defl=8
+    //% height.min=1 height.max=16 height.defl=11
+    export function addCustomChar(image: Image, char: string, width: number, height: number): void {
+        if (char != "" && image != null && image != undefined) {
+            char = char[0]
+            let compressedChar: number[] = []
+
+            // 存储尺寸信息
+            compressedChar.push(width)  // 第一个字节存储宽度
+            compressedChar.push(height) // 第二个字节存储高度
+
+            // 压缩图像数据
+            for (let y = 0; y < height; y++) {
+                let byteCount = Math.ceil(width / 8)
+                for (let byteIndex = 0; byteIndex < byteCount; byteIndex++) {
+                    let tmp = 0x00
+                    for (let x = 0; x < 8; x++) {
+                        let pixelX = byteIndex * 8 + x
+                        if (pixelX < width && image.pixel(pixelX, y)) {
+                            tmp |= 0x01 << (7 - x)
+                        }
+                    }
+                    compressedChar.push(tmp)
+                }
+            }
+
+            charset.unshift(compressedChar)
+            charsetIndex.unshift(char)
+        }
+    }
+
+    /**
      * Create image for `add character` function.
      */
     //% block="character image"
