@@ -1,10 +1,17 @@
 // SH1106 OLED驱动 (128x64)
 class SH1106{
 
-    SH1106_ADDR : Number
-    screen : Buffer
-    charset: number[][]
-    charsetIndex: string[]
+    private SH1106_ADDR : number
+    private screen : Buffer
+    private charset: number[][]
+    private charsetIndex: string[]
+
+    constructor(addr: number = 0x3C) {
+        this.SH1106_ADDR = addr
+        this.screen = pins.createBuffer(1025) // 128x64 / 8 = 1024 + 1 command byte
+        this.charset = []
+        this.charsetIndex = []
+    }
 
     // SH1106 command functions
     cmd1(cmd1: number): void {
@@ -54,8 +61,8 @@ class SH1106{
      * Initialize SH1106 OLED display, this command must be called at the start of the program.
      */
     init(): void {
-        this.screen = pins.createBuffer(1025)
-        this.SH1106_ADDR = 0x3C
+        // this.screen = pins.createBuffer(1025)
+        // this.SH1106_ADDR = 0x3C
 
         // SH1106 initialization sequence
         this.cmd1(0xAE)       // Display OFF
