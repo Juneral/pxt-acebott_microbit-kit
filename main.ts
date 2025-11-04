@@ -346,6 +346,27 @@ namespace Microbit_Kit {
     let LCD1602Init = false;
     let _LCD1602: LCD1602;
 
+    //% blockId="LCD1602_ShowString" block="LCD1602 at (x:|%x|,y:|%y) show string|%s|"
+    //% x.min=0 x.max=15
+    //% y.min=0 y.max=1
+    //% s.defl="Hello,Acebott!"
+    //% subcategory="LCD1602"
+    export function LCD1602_ShowString(x: number, y: number, s: string): void {
+        let a: number
+
+        if (y > 0)
+            a = 0xC0
+        else
+            a = 0x80
+        a += x
+        _LCD1602.cmd(a)
+
+        for (let i = 0; i < s.length; i++) {
+            _LCD1602.dat(s.charCodeAt(i))
+        }
+    }
+
+
     //% blockId="LCD16202_ShowNumber" block="LCD1602 at (x:|%x|,y:|%y) show number|%n|"
     //% x.min=0 x.max=15
     //% y.min=0 y.max=1
