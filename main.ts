@@ -236,6 +236,34 @@ namespace Microbit_Kit {
         }
     } 
 
+    // Barometric Pressure Sensor
+    let BMP280Init = false;
+    let bmp280: BMP280;
+
+    // //% blockId="BMP280_GET_TEMPERATURE" block="get temperature"
+    // //% subcategory=Microbit_Kit
+    // //% group="Barometric Pressure Sensor"
+    // //% weight=80 blockGap=8
+    export function BMP280_getTemperature(): number {
+        if (!BMP280Init) {
+            bmp280 = new BMP280();
+            BMP280Init = true;
+        }
+        return bmp280.temperature();
+    }
+
+    //% blockId="BMP280_GET_PRESSURE" block="get pressure"
+    //% subcategory=Microbit_Kit
+    //% group="Barometric Pressure Sensor"
+    //% weight=80 blockGap=8
+    export function BMP280_getPressure(): number {
+        if (!BMP280Init) {
+            bmp280 = new BMP280();
+            BMP280Init = true;
+        }
+        return bmp280.pressure();
+    }
+
     
 
     // Color Sensor V2.0
