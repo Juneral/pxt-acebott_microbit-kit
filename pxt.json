@@ -12,7 +12,8 @@
         "main.ts",
         "BH1745NUC.ts",
         "SH1106.ts",
-        "BMP280.ts"
+        "BMP280.ts",
+        "I2C_Driver.ts"
     ],
     "testFiles": [
         "test.ts"
