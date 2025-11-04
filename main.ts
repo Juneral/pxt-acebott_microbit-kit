@@ -81,6 +81,7 @@ const enum MyAnalogPin {
 namespace Microbit_Kit {
     
     //% blockId=LED_Module block="LED at %pin| is %status"   group="LED"
+    //% subcategory=Module
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=4
     export function myLED(pin: MyDigitalPin, status: LED): void {
@@ -101,6 +102,7 @@ namespace Microbit_Kit {
     //% gpin.defl=MyAnalogPin.P1
     //% bpin.defl=MyAnalogPin.P2
     //% inlineInputMode=inline
+    //% subcategory=Module
     export function myRGB(rpin: MyDigitalPin, rv: number, gpin: MyDigitalPin, gv: number, bpin: MyDigitalPin, bv: number): void {
         pins.analogWritePin(rpin, rv)
         pins.analogWritePin(gpin, gv)
@@ -109,6 +111,7 @@ namespace Microbit_Kit {
 
     //% blockId=Button block="Button at %pin is pressed" 
     //% group="Button"
+    //% subcategory=Module
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=4
     export function myButton(pin: MyDigitalPin): boolean {
@@ -117,6 +120,7 @@ namespace Microbit_Kit {
     }
 
     //% blockId=Joystick_Button block="Joystick button at %pin is pressed"
+    //% subcategory=Module
     //% group="Joystick"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=4
@@ -127,6 +131,7 @@ namespace Microbit_Kit {
     }
 
     //% blockId=Joystick_Y block="Joystick Y-axis at %pin get value"
+    //% subcategory=Module
     //% group="Joystick"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=3
@@ -136,6 +141,7 @@ namespace Microbit_Kit {
     }
 
     //% blockId=Joystick_X block="Joystick X-axis at %pin get value"
+    //% subcategory=Module
     //% group="Joystick"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=3
@@ -145,6 +151,7 @@ namespace Microbit_Kit {
     }
 
     //% blockId=Light_Sensor block="Light Sensor at %pin get value"
+    //% subcategory=Sensor
     //% group="Light Sensor"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=3
@@ -153,6 +160,7 @@ namespace Microbit_Kit {
     }
 
     //% blockId=Sound_Sensor block="Sound Sensor at %pin get value"
+    //% subcategory=Sensor
     //% group="Sound Sensor"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=3
@@ -161,6 +169,7 @@ namespace Microbit_Kit {
     }
 
     //% blockId=Tilt_Sensor block="Tilt Sensor at %pin is tilted" 
+    //% subcategory=Sensor
     //% group="Tilt Sensor"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=4
@@ -169,6 +178,7 @@ namespace Microbit_Kit {
     }
 
     //% blockId=Soil_Moisture_Sensor_Digital block="Soil Moisture Sensor at %pin digital value"
+    //% subcategory=Sensor
     //% group="Soil Moisture Sensor"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=4
@@ -177,6 +187,7 @@ namespace Microbit_Kit {
     }
 
     //% blockId=Soil_Moisture_Sensor_Analog block="Soil Moisture Sensor at %pin analog value"
+    //% subcategory=Sensor
     //% group="Soil Moisture Sensor"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=3
@@ -185,6 +196,7 @@ namespace Microbit_Kit {
     }
 
     //% blockId=Infrared_Obstacle_Avoidance_Sensor block="Infrared Obstacle Avoidance Sensor at %pin digital value"
+    //% subcategory=Sensor
     //% group="Infrared Obstacle Avoidance Sensor"
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=4
@@ -193,6 +205,7 @@ namespace Microbit_Kit {
     }
 
     //% blockId=Relay block="Relay at %pin is %status"   group="Relay"
+    //% subcategory=Module
     //% pin.fieldEditor=pinpicker
     //% pin.fieldOptions.columns=4
     export function myRelay(pin: MyDigitalPin, status: RELAY): void {
@@ -200,6 +213,7 @@ namespace Microbit_Kit {
     }
 
     //% blockId=Ultrasonic_Sensor block="Ultrasonic Sensor ECHO at %epin TRIG at is %tpin get distance in %unit"
+    //% subcategory=Sensor
     //% group="Ultrasonic Sensor"
     //% epin.fieldEditor=pinpicker
     //% epin.fieldOptions.columns=4
@@ -240,10 +254,10 @@ namespace Microbit_Kit {
     let BMP280Init = false;
     let bmp280: BMP280;
 
-    // //% blockId="BMP280_GET_TEMPERATURE" block="get temperature"
-    // //% subcategory=Microbit_Kit
-    // //% group="Barometric Pressure Sensor"
-    // //% weight=80 blockGap=8
+    //% blockId="BMP280_GET_TEMPERATURE" block="get temperature"
+    //% subcategory=Sensor
+    //% group="Barometric Pressure Sensor"
+    //% weight=80 blockGap=8
     export function BMP280_getTemperature(): number {
         if (!BMP280Init) {
             bmp280 = new BMP280();
@@ -253,7 +267,7 @@ namespace Microbit_Kit {
     }
 
     //% blockId="BMP280_GET_PRESSURE" block="get pressure"
-    //% subcategory=Microbit_Kit
+    //% subcategory=Sensor
     //% group="Barometric Pressure Sensor"
     //% weight=80 blockGap=8
     export function BMP280_getPressure(): number {
@@ -264,12 +278,11 @@ namespace Microbit_Kit {
         return bmp280.pressure();
     }
 
-    
-
     // Color Sensor V2.0
     let BH1745ColorInit = false;
     let BH1745: BH1745NUC;
     //% blockId=Color_Sensor_Update block="Color Sensor update value"
+    //% subcategory=Sensor
     //% group="Color Sensor"
     //% weight=53 color=#49CEF7
     export function Color_Sensor_Update(): void {
@@ -281,6 +294,7 @@ namespace Microbit_Kit {
     }
 
     //% blockId=Color_Sensor_getValue block="Color Sensor get %type value"
+    //% subcategory=Sensor
     //% group="Color Sensor" weight=52 color=#49CEF7
     export function ColorSensor_getValue(type: ColorType): number {
         if (!BH1745ColorInit) {
@@ -293,8 +307,6 @@ namespace Microbit_Kit {
     // SH1106 OLED 128*64 Driver Block
     let OLEDInit = false;
     let OLED:SH1106;
-
-
 
     //% blockId=OLED_SetPixel block="OLED set pixel at (%x,%y) to %color"
     //% subcategory="1.3 inch OLED"
