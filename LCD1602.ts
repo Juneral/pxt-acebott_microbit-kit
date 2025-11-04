@@ -32,7 +32,7 @@ class LCD1602{
         this.RS = 0
     }
 
-    LCD1602_Init(): void {
+    init(): void {
         this.cmd(0x33)       // set 4bit mode
         basic.pause(5)
         this.set(0x30)

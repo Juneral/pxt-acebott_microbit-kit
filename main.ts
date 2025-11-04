@@ -252,7 +252,7 @@ namespace Microbit_Kit {
 
     // Barometric Pressure Sensor
     let BMP280Init = false;
-    let bmp280: BMP280;
+    let _BMP280: BMP280;
 
     //% blockId="BMP280_GET_TEMPERATURE" block="get temperature"
     //% subcategory=Sensor
@@ -260,10 +260,10 @@ namespace Microbit_Kit {
     //% weight=80 blockGap=8
     export function BMP280_getTemperature(): number {
         if (!BMP280Init) {
-            bmp280 = new BMP280();
+            _BMP280 = new BMP280();
             BMP280Init = true;
         }
-        return bmp280.temperature();
+        return _BMP280.temperature();
     }
 
     //% blockId="BMP280_GET_PRESSURE" block="get pressure"
@@ -272,10 +272,10 @@ namespace Microbit_Kit {
     //% weight=80 blockGap=8
     export function BMP280_getPressure(): number {
         if (!BMP280Init) {
-            bmp280 = new BMP280();
+            _BMP280 = new BMP280();
             BMP280Init = true;
         }
-        return bmp280.pressure();
+        return _BMP280.pressure();
     }
 
     // Color Sensor V2.0
@@ -343,6 +343,30 @@ namespace Microbit_Kit {
         }
         OLED.init()
     }
+
+    // LCD1602 Block Driver
+    let LCD1602Init = false;
+    let _LCD1602: LCD1602;
+
+    
+
+    //% blockId="LCD1602_Clear" block="LCD1602 clear screen"
+    //% subcategory="LCD1602"
+    export function LCD1602_Clear(): void {
+        _LCD1602.ClearScreen()
+    }
+
+    //% blockId=LCD1602_Init block="LCD1602 Init"
+    //% subcategory="LCD1602"
+    export function LCD1602_Init(): void {
+        if (!LCD1602Init) {
+            _LCD1602 = new LCD1602()
+            LCD1602Init = true
+        }
+        _LCD1602.init()
+    }
+
+
 
     
 
