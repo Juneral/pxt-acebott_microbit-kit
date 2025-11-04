@@ -431,17 +431,15 @@ namespace Microbit_Kit {
     let OLEDInit = false;
     let OLED:SH1106;
 
-    
-
     //% blockId=OLED_SetPixel block="OLED set pixel at (%x,%y) to %color"
     //% group="1.3 inch OLED"
     export function OLED_SetPixel(x:number,y:number,color: boolean): void {
         OLED.setPixel(x,y,color)
     }
 
-    //% blockId=OLED_refresh block="OLED refresh screen"
+    //% blockId=OLED_Refresh block="OLED refresh screen"
     //% group="1.3 inch OLED"
-    export function OLED_refresh(): void {
+    export function OLED_Refresh(): void {
         OLED.refresh()
     }
 

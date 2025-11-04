@@ -1,7 +1,7 @@
 // SH1106 OLED驱动 (128x64)
 class SH1106{
 
-    SH1106_ADDR : 0x3C
+    SH1106_ADDR : Number
     screen : Buffer
     charset: number[][]
     charsetIndex: string[]
@@ -55,6 +55,7 @@ class SH1106{
      */
     init(): void {
         this.screen = pins.createBuffer(1025)
+        this.SH1106_ADDR = 0x3C
 
         // SH1106 initialization sequence
         this.cmd1(0xAE)       // Display OFF
