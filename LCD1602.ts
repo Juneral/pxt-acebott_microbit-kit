@@ -29,7 +29,8 @@ class LCD1602{
     constructor() {
         this.LCD1602_ADDR = 0x27; // 0x27: PCF8574
         this.BK = 8;
-        this.RS = 0
+        this.RS = 0;
+        this.Custom_Char=[];
     }
 
     init(): void {

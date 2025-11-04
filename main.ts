@@ -19,8 +19,6 @@ const enum DistanceUnit {
     INCH = 1
 }
 
-
-
 const enum MyDigitalPin {
     //% block="P0"
     P0 = 100,
@@ -348,7 +346,14 @@ namespace Microbit_Kit {
     let LCD1602Init = false;
     let _LCD1602: LCD1602;
 
-    
+    //% blockId="LCD16202_ShowNumber" block="LCD1602 at (x:|%x|,y:|%y) show number|%n|"
+    //% x.min=0 x.max=15
+    //% y.min=0 y.max=1
+    //% subcategory="LCD1602"
+    export function LCD1602_ShowNumber(x: number, y: number, n: number): void {
+        let s = n.toString()
+        _LCD1602.ShowString(x, y, s)
+    }
 
     //% blockId="LCD1602_Clear" block="LCD1602 clear screen"
     //% subcategory="LCD1602"
