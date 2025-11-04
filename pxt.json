@@ -11,7 +11,8 @@
         "README.md",
         "main.ts",
         "BH1745NUC.ts",
-        "SH1106.ts"
+        "SH1106.ts",
+        "BMP280.ts"
     ],
     "testFiles": [
         "test.ts"

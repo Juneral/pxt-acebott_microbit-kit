@@ -1,7 +1,5 @@
-
-
 // SH1106 OLED驱动 (128x64)
-const ADDR = 0x3C
+const SH1106_ADDR = 0x3C
 let screen = pins.createBuffer(1025) // 128x64 / 8 = 1024 + 1 command byte
 let charset: number[][] = []
 let charsetIndex: string[] = []
@@ -11,7 +9,7 @@ function cmd1(cmd1: number): void {
     let buffer = pins.createBuffer(2)
     buffer[0] = 0x00  // Co=0, D/C=0
     buffer[1] = cmd1
-    pins.i2cWriteBuffer(ADDR, buffer)
+    pins.i2cWriteBuffer(SH1106_ADDR, buffer)
 }
 
 function cmd2(cmd1: number, cmd2: number): void {
@@ -19,7 +17,7 @@ function cmd2(cmd1: number, cmd2: number): void {
     buffer[0] = 0x00
     buffer[1] = cmd1
     buffer[2] = cmd2
-    pins.i2cWriteBuffer(ADDR, buffer)
+    pins.i2cWriteBuffer(SH1106_ADDR, buffer)
 }
 
 function cmd3(cmd1: number, cmd2: number, cmd3: number): void {
@@ -28,7 +26,7 @@ function cmd3(cmd1: number, cmd2: number, cmd3: number): void {
     buffer[1] = cmd1
     buffer[2] = cmd2
     buffer[3] = cmd3
-    pins.i2cWriteBuffer(ADDR, buffer)
+    pins.i2cWriteBuffer(SH1106_ADDR, buffer)
 }
 
 function showbit(bit: number, shift: number): number {
@@ -50,6 +48,7 @@ function getbit(bits: number, shift: number): number {
     return (bits >> shift) & 1;
 }
 
+//% subcategory=Microbit_Kit
 namespace SH1106{
 
 /**
@@ -58,6 +57,7 @@ namespace SH1106{
 //% block="init SH1106 OLED display"
 //% group="1.3 inch OLED"
 //% weight=101
+//% subcategory=Microbit_Kit
 export function init(): void {
     screen = pins.createBuffer(1025)
 
@@ -136,7 +136,7 @@ export function draw(): void {
             pageBuffer[col + 1] = screen[page * 128 + col + 1]
         }
 
-        pins.i2cWriteBuffer(ADDR, pageBuffer)
+        pins.i2cWriteBuffer(SH1106_ADDR, pageBuffer)
     }
 }
 

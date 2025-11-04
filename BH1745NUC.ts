@@ -26,7 +26,7 @@ let BH1745NUC_ADC_GAIN_2 = 1
 let BH1745NUC_ADC_GAIN_16 = 2
 let BH1745NUC_DEFAULT_RESERVED = 2
 
-const enum colorType {
+const enum ColorType {
     //% block="red"
     Red = 0,
     //% block="green"
