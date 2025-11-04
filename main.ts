@@ -1034,23 +1034,5 @@ namespace Microbit_Kit {
         return T;
     }
 
-    /**
-     * power on
-     */
-    //% blockId="BMP280_POWER_ON" block="Power On"
-    //% group="Barometric Pressure Sensor"
-    //% weight=61 blockGap=8
-    export function PowerOn() {
-        BMP280_setreg(0xF4, 0x2F)
-    }
-
-    /**
-     * power off
-     */
-    //% blockId="BMP280_POWER_OFF" block="Power Off"
-    //% group="Barometric Pressure Sensor"
-    //% weight=60 blockGap=8
-    export function PowerOff() {
-        BMP280_setreg(0xF4, 0)
-    }  
+    
 }
