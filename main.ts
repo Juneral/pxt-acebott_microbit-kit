@@ -427,6 +427,18 @@ namespace Microbit_Kit {
         return BH1745.getValue(type)
     }
 
+    // SH1106 OLED 128*64 Driver Block
+    let OLEDInit = false;
+    let OLED:SH1106;
+
+    //% blockId=OLED_Init block="OLED Init"
+    //% group="1.3 inch OLED"
+    export function OLED_Init():void{
+        OLED.init()
+    }
+
+
+
 
     
 }
