@@ -311,6 +311,7 @@ namespace Microbit_Kit {
      */
     //% block="character image 16x16"
     //% subcategory="1.3 inch OLED"
+    //% shim=images::createImage
     //% imageLiteral=1 imageLiteralRows=16 imageLiteralColumns=16
     export function charImage16x16(leds: string): Image {
         return <Image><any>leds

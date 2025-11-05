@@ -10,8 +10,6 @@ const enum OLEDFontSize{
     Font5x7 = 0,
     //% block="8x11"
     Font8x11 = 1,
-    //% block="12x12"
-    Font12x12 = 2
 }
 
 const enum OLEDNumberSize {
