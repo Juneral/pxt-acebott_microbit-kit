@@ -87,18 +87,18 @@ namespace Microbit_Kit {
     }
 
     //% blockId=RGB_Module block="RGB Red %rpin %rv Green %gpin %gv Blue %bpin %bv"   group="RGB"
-    //% rpin.fieldEditor=pinpicker
+    //% rpin.fieldEditor="gridpicker"
     //% rpin.fieldOptions.columns=4
-    //% gpin.fieldEditor=pinpicker
+    //% gpin.fieldEditor="gridpicker"
     //% gpin.fieldOptions.columns=4
-    //% bpin.fieldEditor=pinpicker
+    //% bpin.fieldEditor="gridpicker"
     //% bpin.fieldOptions.columns=4
     //% rv.min=0 rv.max=1023
     //% gv.min=0 gv.max=1023
     //% bv.min=0 bv.max=1023
-    //% rpin.defl=MyAnalogPin.P0
-    //% gpin.defl=MyAnalogPin.P1
-    //% bpin.defl=MyAnalogPin.P2
+    //% rpin.defl=MyDigitalPin.P0
+    //% gpin.defl=MyDigitalPin.P1
+    //% bpin.defl=MyDigitalPin.P2
     //% inlineInputMode=inline
     //% subcategory=Module
     export function myRGB(rpin: MyDigitalPin, rv: number, gpin: MyDigitalPin, gv: number, bpin: MyDigitalPin, bv: number): void {
@@ -592,7 +592,6 @@ namespace Microbit_Kit {
     // Servo
     //% blockId=Servo_180 block="180° Servo at %pin set angle %angle"  
     //% angle.min=0 angle.max=180
-    //% pin.defl=MyDigitalPin.P0
     //% angle.defl=90
     //% group="Servo 180"
     //% subcategory="Motor"
@@ -606,7 +605,6 @@ namespace Microbit_Kit {
 
     //% blockId=Servo_360 block="360° Servo at %pin set angle %angle"  
     //% angle.min=0 angle.max=360
-    //% pin.defl=MyDigitalPin.P0
     //% angle.defl=90
     //% group="Servo 360"
     //% subcategory="Motor"
