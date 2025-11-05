@@ -346,6 +346,53 @@ namespace Microbit_Kit {
     let LCD1602Init = false;
     let _LCD1602: LCD1602;
 
+    //% blockId="LCD1602_Makecharacter"
+    //% block="LCD1602 create custom character %char_index|%im"
+    //% subcategory="LCD1602"
+    export function LCD1602_CreateCharacter(char_index: CharIndex, im: Image): void {
+        const customChar = [0, 0, 0, 0, 0, 0, 0, 0];
+        for (let y = 0; y < 8; y++) {
+            for (let x = 0; x < 5; x++) {
+                if (im.pixel(x, y)) {
+                    customChar[y] |= 1 << (4 - x)
+                }
+            }
+        }
+        _LCD1602.Custom_Char[char_index] = customChar;
+    }
+
+    //% blockId="LCD1602_Characterpixels"
+    //% block="Custom character"
+    //% imageLiteral=1
+    //% imageLiteralColumns=5
+    //% imageLiteralRows=8
+    //% imageLiteralScale=0.6
+    //% shim=images::createImage
+    //% subcategory="LCD1602"
+    export function LCD1602_CharacterPixels(i: string): Image {
+        return <Image><any>i;
+    }
+
+    //% blockId="LCD1602_Showchararacter"
+    //% block="LCD1602 at (x:|%x|,y:|%y) show custom character|%char_index"
+    //% x.min=0 x.max=15
+    //% y.min=0 y.max=1
+    //% subcategory="LCD1602"
+    export function LCD1602_Showchararacter(x: number, y: number, char_index: CharIndex): void {
+        let a: number
+        if (y > 0)
+            a = 0xC0
+        else
+            a = 0x80
+        a += x
+        _LCD1602.cmd(0x40 | (char_index << 3));
+        for (let y = 0; y < 8; y++) {
+            _LCD1602.dat(_LCD1602.Custom_Char[char_index][y]);
+        }
+        _LCD1602.cmd(a)
+        _LCD1602.dat(char_index)
+
+    }
     //% blockId="LCD1602_ShowString" block="LCD1602 at (x:|%x|,y:|%y) show string|%s|"
     //% x.min=0 x.max=15
     //% y.min=0 y.max=1
@@ -365,7 +412,6 @@ namespace Microbit_Kit {
             _LCD1602.dat(s.charCodeAt(i))
         }
     }
-
 
     //% blockId="LCD16202_ShowNumber" block="LCD1602 at (x:|%x|,y:|%y) show number|%n|"
     //% x.min=0 x.max=15

@@ -24,7 +24,7 @@ class LCD1602{
     private LCD1602_ADDR: number 
     private BK: number      // backlight control
     private RS: number      // command/data
-    private Custom_Char: number[][] = []
+    public Custom_Char: number[][] = []
 
     constructor() {
         this.LCD1602_ADDR = 0x27; // 0x27: PCF8574
