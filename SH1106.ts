@@ -1,3 +1,28 @@
+const enum OLEDDisplayMode{
+    //% block="Normal"
+    Normal = 0,
+    //% block="Inverse"
+    Inverse = 1
+}
+
+const enum OLEDFontSize{
+    //% block="5x7"
+    Font5x7 = 0,
+    //% block="8x11"
+    Font8x11 = 1,
+    //% block="12x12"
+    Font12x12 = 2
+}
+
+const enum OLEDNumberSize {
+    //% block="3x5"
+    Font3x5 = 0,
+    //% block="8x11"
+    Font5x7 = 1,
+    //% block="12x12"
+    Font8x11 = 2
+}
+
 // SH1106 OLED驱动 (128x64)
 class SH1106{
 
@@ -61,9 +86,6 @@ class SH1106{
      * Initialize SH1106 OLED display, this command must be called at the start of the program.
      */
     init(): void {
-        // this.screen = pins.createBuffer(1025)
-        // this.SH1106_ADDR = 0x3C
-
         // SH1106 initialization sequence
         this.cmd1(0xAE)       // Display OFF
         this.cmd1(0xA4)       // Display follows RAM content
@@ -162,13 +184,142 @@ class SH1106{
      * @param x coordinate x (increases towards the right)
      * @param y coordinate y (increases downwards)
      */
-
     getPixel(x: number, y: number): boolean {
         const index = Math.round(Math.floor(y / 8) * 128 + x + 1)
         if ((index < 1025) && (index > -1) && (x < 128) && (x > -1) && (y > -1) && (y < 64)) {
             return this.getbit(this.screen[index], (y % 8)) == 1
         } else {
             return false
+        }
+    }
+
+    draw5x7Text(text: string, x: number, y: number, color: boolean): void {
+        const font5x7 = [
+            [0x00, 0x00, 0x00, 0x00, 0x00], // 空格 (32)
+            [0x00, 0x00, 0x5F, 0x00, 0x00], // !
+            [0x00, 0x07, 0x00, 0x07, 0x00], // "
+            [0x14, 0x7F, 0x14, 0x7F, 0x14], // #
+            [0x24, 0x2A, 0x7F, 0x2A, 0x12], // $
+            [0x23, 0x13, 0x08, 0x64, 0x62], // %
+            [0x36, 0x49, 0x55, 0x22, 0x50], // &
+            [0x00, 0x05, 0x03, 0x00, 0x00], // '
+            [0x00, 0x1C, 0x22, 0x41, 0x00], // (
+            [0x00, 0x41, 0x22, 0x1C, 0x00], // )
+            [0x14, 0x08, 0x3E, 0x08, 0x14], // *
+            [0x08, 0x08, 0x3E, 0x08, 0x08], // +
+            [0x00, 0x50, 0x30, 0x00, 0x00], // ,
+            [0x08, 0x08, 0x08, 0x08, 0x08], // -
+            [0x00, 0x60, 0x60, 0x00, 0x00], // .
+            [0x20, 0x10, 0x08, 0x04, 0x02], // /
+            [0x3E, 0x51, 0x49, 0x45, 0x3E], // 0
+            [0x00, 0x42, 0x7F, 0x40, 0x00], // 1
+            [0x42, 0x61, 0x51, 0x49, 0x46], // 2
+            [0x21, 0x41, 0x45, 0x4B, 0x31], // 3
+            [0x18, 0x14, 0x12, 0x7F, 0x10], // 4
+            [0x27, 0x45, 0x45, 0x45, 0x39], // 5
+            [0x3C, 0x4A, 0x49, 0x49, 0x30], // 6
+            [0x01, 0x71, 0x09, 0x05, 0x03], // 7
+            [0x36, 0x49, 0x49, 0x49, 0x36], // 8
+            [0x06, 0x49, 0x49, 0x29, 0x1E], // 9
+            [0x00, 0x36, 0x36, 0x00, 0x00], // :
+            [0x00, 0x56, 0x36, 0x00, 0x00], // ;
+            [0x08, 0x14, 0x22, 0x41, 0x00], // <
+            [0x14, 0x14, 0x14, 0x14, 0x14], // =
+            [0x00, 0x41, 0x22, 0x14, 0x08], // >
+            [0x02, 0x01, 0x51, 0x09, 0x06], // ?
+            [0x32, 0x49, 0x79, 0x41, 0x3E], // @
+            [0x7E, 0x11, 0x11, 0x11, 0x7E], // A
+            [0x7F, 0x49, 0x49, 0x49, 0x36], // B
+            [0x3E, 0x41, 0x41, 0x41, 0x22], // C
+            [0x7F, 0x41, 0x41, 0x22, 0x1C], // D
+            [0x7F, 0x49, 0x49, 0x49, 0x41], // E
+            [0x7F, 0x09, 0x09, 0x09, 0x01], // F
+            [0x3E, 0x41, 0x49, 0x49, 0x7A], // G
+            [0x7F, 0x08, 0x08, 0x08, 0x7F], // H
+            [0x00, 0x41, 0x7F, 0x41, 0x00], // I
+            [0x20, 0x40, 0x41, 0x3F, 0x01], // J
+            [0x7F, 0x08, 0x14, 0x22, 0x41], // K
+            [0x7F, 0x40, 0x40, 0x40, 0x40], // L
+            [0x7F, 0x02, 0x0C, 0x02, 0x7F], // M
+            [0x7F, 0x04, 0x08, 0x10, 0x7F], // N
+            [0x3E, 0x41, 0x41, 0x41, 0x3E], // O
+            [0x7F, 0x09, 0x09, 0x09, 0x06], // P
+            [0x3E, 0x41, 0x51, 0x21, 0x5E], // Q
+            [0x7F, 0x09, 0x19, 0x29, 0x46], // R
+            [0x46, 0x49, 0x49, 0x49, 0x31], // S
+            [0x01, 0x01, 0x7F, 0x01, 0x01], // T
+            [0x3F, 0x40, 0x40, 0x40, 0x3F], // U
+            [0x1F, 0x20, 0x40, 0x20, 0x1F], // V
+            [0x3F, 0x40, 0x38, 0x40, 0x3F], // W
+            [0x63, 0x14, 0x08, 0x14, 0x63], // X
+            [0x07, 0x08, 0x70, 0x08, 0x07], // Y
+            [0x61, 0x51, 0x49, 0x45, 0x43], // Z
+            [0x00, 0x7F, 0x41, 0x41, 0x00], // [
+            [0x02, 0x04, 0x08, 0x10, 0x20], // \
+            [0x00, 0x41, 0x41, 0x7F, 0x00], // ]
+            [0x04, 0x02, 0x01, 0x02, 0x04], // ^
+            [0x40, 0x40, 0x40, 0x40, 0x40], // _
+            [0x00, 0x01, 0x02, 0x04, 0x00], // `
+            [0x20, 0x54, 0x54, 0x54, 0x78], // a
+            [0x7F, 0x48, 0x44, 0x44, 0x38], // b
+            [0x38, 0x44, 0x44, 0x44, 0x20], // c
+            [0x38, 0x44, 0x44, 0x48, 0x7F], // d
+            [0x38, 0x54, 0x54, 0x54, 0x18], // e
+            [0x08, 0x7E, 0x09, 0x01, 0x02], // f
+            [0x0C, 0x52, 0x52, 0x52, 0x3E], // g
+            [0x7F, 0x08, 0x04, 0x04, 0x78], // h
+            [0x00, 0x44, 0x7D, 0x40, 0x00], // i
+            [0x20, 0x40, 0x44, 0x3D, 0x00], // j
+            [0x7F, 0x10, 0x28, 0x44, 0x00], // k
+            [0x00, 0x41, 0x7F, 0x40, 0x00], // l
+            [0x7C, 0x04, 0x18, 0x04, 0x78], // m
+            [0x7C, 0x08, 0x04, 0x04, 0x78], // n
+            [0x38, 0x44, 0x44, 0x44, 0x38], // o
+            [0x7C, 0x14, 0x14, 0x14, 0x08], // p
+            [0x08, 0x14, 0x14, 0x18, 0x7C], // q
+            [0x7C, 0x08, 0x04, 0x04, 0x08], // r
+            [0x48, 0x54, 0x54, 0x54, 0x20], // s
+            [0x04, 0x3F, 0x44, 0x40, 0x20], // t
+            [0x3C, 0x40, 0x40, 0x20, 0x7C], // u
+            [0x1C, 0x20, 0x40, 0x20, 0x1C], // v
+            [0x3C, 0x40, 0x30, 0x40, 0x3C], // w
+            [0x44, 0x28, 0x10, 0x28, 0x44], // x
+            [0x0C, 0x50, 0x50, 0x50, 0x3C], // y
+            [0x44, 0x64, 0x54, 0x4C, 0x44], // z
+            [0x00, 0x08, 0x36, 0x41, 0x00], // {
+            [0x00, 0x00, 0x7F, 0x00, 0x00], // |
+            [0x00, 0x41, 0x36, 0x08, 0x00], // }
+            [0x10, 0x08, 0x08, 0x10, 0x08]  // ~
+        ]
+
+        for (let i = 0; i < text.length; i++) {
+            const charCode = text.charCodeAt(i)
+            if (charCode >= 32 && charCode <= 126) {
+                const charData = font5x7[charCode - 32]
+                for (let col = 0; col < 5; col++) {
+                    for (let row = 0; row < 7; row++) {
+                        if (charData[col] & (1 << row)) {
+                            this.setPixel(x + i * 6 + col, y + row, color)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    draw5x7AsciiTextWithMode(text: string, x: number, y: number, mode: OLEDDisplayMode): void {
+        const textWidth = text.length * 6
+        const textHeight = 8
+
+        switch (mode) {
+            case OLEDDisplayMode.Normal:
+                this.draw5x7Text(text, x, y, true)
+                break
+
+            case OLEDDisplayMode.Inverse:
+                this.drawRect(x, y-1, x + textWidth, y + textHeight-1, true, true, false)
+                this.draw5x7Text(text, x+1, y, false)
+                break  
         }
     }
 
@@ -182,7 +333,7 @@ class SH1106{
      * @param color color of text
      * @param toggle sets whether to use pixel switching instead of setting the pixel to a specific color (if `true`, `color` means nothing)
      */
-    drawText(text: string, x: number, y: number, color: boolean, toggle: boolean): void {
+    draw8x11Text(text: string, x: number, y: number, color: boolean): void {
         const font = [
             [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
             [0x00, 0x10, 0x10, 0x10, 0x10, 0x10, 0x00, 0x10, 0x10, 0x00, 0x00],
@@ -278,41 +429,53 @@ class SH1106{
             [0x0C, 0x10, 0x10, 0x08, 0x30, 0x08, 0x10, 0x10, 0x10, 0x0C, 0x00],
             [0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x00],
             [0x30, 0x08, 0x08, 0x10, 0x0C, 0x10, 0x08, 0x08, 0x08, 0x30, 0x00],
-            [0x00, 0x00, 0x00, 0x32, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+            //[0x00, 0x00, 0x00, 0x32, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+            [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x18, 0x18, 0x00, 0x00]
         ]
+
         let line = 0
         let lineStart = 0
+
         for (let i = 0; i < text.length; i++) {
             if (text[i] == '\n') {
                 line++
                 lineStart = i + 1
             } else if (this.charsetIndex.indexOf(text[i]) !== -1) {
+                // 绘制自定义字符
                 for (let j = 0; j < 11; j++) {
                     for (let k = 0; k < 8; k++) {
                         if (this.charset[this.charsetIndex.indexOf(text[i])][j] & (0x01 << k)) {
-                            if (toggle) {
-                                this.togglePixel(x + ((i - lineStart) * 8) + (8 - k), y + (line * 10) + j)
-                            } else {
-                                this.setPixel(x + ((i - lineStart) * 8) + (8 - k), y + (line * 10) + j, color)
-                            }
+                            this.setPixel(x + ((i - lineStart) * 8) + (8 - k), y + (line * 10) + j, color)
                         }
                     }
                 }
             } else if (text[i].charCodeAt(0) < 128 && text[i].charCodeAt(0) >= 32) {
+                // 绘制内置字体字符
                 for (let j = 0; j < 11; j++) {
                     for (let k = 0; k < 8; k++) {
                         if (font[text[i].charCodeAt(0) - 32][j] & (0x01 << k)) {
-                            if (toggle) {
-                                this.togglePixel(x + ((i - lineStart) * 8) + (8 - k), y + (line * 10) + j)
-                            } else {
-                                this.setPixel(x + ((i - lineStart) * 8) + (8 - k), y + (line * 10) + j, color)
-                            }
+                            this.setPixel(x + ((i - lineStart) * 8) + (8 - k), y + (line * 10) + j, color)
                         }
                     }
                 }
-            } else {
             }
             basic.pause(1)
+        }  
+    }
+
+    draw8x11AsciiTextWithMode(text: string, x: number, y: number, mode: OLEDDisplayMode): void {
+        const textWidth = text.length * 8
+        const textHeight = 11
+
+        switch (mode) {
+            case OLEDDisplayMode.Normal:
+                this.draw8x11Text(text, x, y, true)
+                break
+
+            case OLEDDisplayMode.Inverse:
+                this.drawRect(x, y, x + textWidth-1, y + textHeight - 2, true, true, false)
+                this.draw8x11Text(text, x-1, y, false)
+                break
         }
     }
 
@@ -327,7 +490,6 @@ class SH1106{
      * @param fill sets whether only the outline or also the fill of the rectangle is drawn
      * @param toggle sets whether to use pixel switching instead of setting the pixel to a specific color (if `true`, `color` means nothing)
      */
-
     drawRect(x1: number, y1: number, x2: number, y2: number, color: boolean, fill: boolean, toggle: boolean): void {
         if (fill) {
             for (let x = x1; x <= x2; x++) {

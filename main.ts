@@ -306,11 +306,48 @@ namespace Microbit_Kit {
     let OLEDInit = false;
     let OLED:SH1106;
 
+    //% blockId=OLED_drawRect block="OLED drawRect from (%x1,%y1) to (%x2,%y3) with fill %fill"
+    //% subcategory="1.3 inch OLED"
+    //% x.min=0 x.max=127 y.min=0 y.max=63
+    //% fill.defl=false
+    export function OLED_drawRect(x1: number, y1: number, x2: number, y2: number, fill: boolean): void {
+        OLED.drawRect(x1, y1, x2, y2, true, fill, false)
+    }
+    
+
     //% blockId=OLED_SetPixel block="OLED set pixel at (%x,%y) to %color"
     //% subcategory="1.3 inch OLED"
     //% x.min=0 x.max=127 y.min=0 y.max=63
+    //% color.defl=true
     export function OLED_SetPixel(x:number,y:number,color: boolean): void {
         OLED.setPixel(x,y,color)
+    }
+
+    //% blockId=OLED_drawNumber block="OLED draw number %num at (%x,%y)| with %mode %size"
+    //% subcategory="1.3 inch OLED"
+    //% x.min=0 x.max=127 y.min=0 y.max=63
+    //% mode.defl=OLEDDisplayMode.Normal
+    //% inlineInputMode=inline
+    export function OLED_drawNumber(num: number, x: number, y: number, mode: OLEDDisplayMode, size: OLEDFontSize): void {
+        let numStr = convertToText(num);
+        switch (size) {
+            case OLEDFontSize.Font5x7: OLED.draw5x7AsciiTextWithMode(numStr, x, y, mode); break;
+            case OLEDFontSize.Font8x11: OLED.draw8x11AsciiTextWithMode(numStr, x, y, mode); break;
+        }
+    }
+
+    //% blockId=OLED_drawText block="OLED draw text %text at (%x,%y)| with color %mode %size"
+    //% subcategory="1.3 inch OLED"
+    //% x.min=0 x.max=127 y.min=0 y.max=63
+    //% mode.defl=OLEDDisplayMode.Normal
+    //% inlineInputMode=inline
+    export function OLED_drawText(text: string, x: number, y: number, mode: OLEDDisplayMode, size: OLEDFontSize): void {
+        switch(size)
+        {
+            case OLEDFontSize.Font5x7: OLED.draw5x7AsciiTextWithMode(text, x, y, mode); break;
+            case OLEDFontSize.Font8x11: OLED.draw8x11AsciiTextWithMode(text, x, y, mode);break;
+        }
+        
     }
 
     //% blockId=OLED_Refresh block="OLED refresh screen"
@@ -319,10 +356,10 @@ namespace Microbit_Kit {
         OLED.refresh()
     }
 
-    //% blockId=OLED_ClearScreen block="OLED Clear Screen to %color"
+    //% blockId=OLED_ClearScreen block="OLED Clear Screen"
     //% subcategory="1.3 inch OLED"
-    export function OLED_ClearScreen(color: boolean): void {
-        OLED.clearScreen(color)
+    export function OLED_ClearScreen(): void {
+        OLED.clearScreen(false)
     }
 
     //% blockId=OLED_SetContrast block="OLED set contrast to %v"
