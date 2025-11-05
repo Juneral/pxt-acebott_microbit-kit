@@ -306,6 +306,37 @@ namespace Microbit_Kit {
     let OLEDInit = false;
     let OLED:SH1106;
 
+    /**
+     * Create image for `add character` function.
+     */
+    //% block="character image 16x16"
+    //% subcategory="1.3 inch OLED"
+    //% imageLiteral=1 imageLiteralRows=16 imageLiteralColumns=16
+    export function charImage16x16(leds: string): Image {
+        return <Image><any>leds
+    }
+
+    /**
+     * Create image for `add character` function.
+     */
+    //% block="character image 8x8"
+    //% subcategory="1.3 inch OLED"
+    //% shim=images::createImage
+    //% imageLiteral=1 imageLiteralRows=8 imageLiteralColumns=8
+    export function charImage8x8(leds: string): Image {
+        return <Image><any>leds
+    }
+
+    //% blockId=OLED_drawImage
+    //% block="OLED draw image|$image|at($x, $y) with %mode"
+    //% mode.defl=OLEDDisplayMode.Normal
+    //% x.min=0 x.max=127 y.min=0 y.max=63
+    //% subcategory="1.3 inch OLED"
+    //% inlineInputMode=inline
+    export function OLED_drawImage(image: Image, x: number, y: number, mode:OLEDDisplayMode): void {
+        OLED.drawImage(image, x, y, mode);
+    }
+
     //% blockId=OLED_drawCircle block="OLED draw circle at (%x,%y) with radius %radius and fill %fill"
     //% subcategory="1.3 inch OLED"
     //% x.min=0 x.max=127 y.min=0 y.max=63

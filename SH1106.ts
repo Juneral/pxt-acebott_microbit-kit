@@ -458,7 +458,7 @@ class SH1106{
                     }
                 }
             }
-            basic.pause(1)
+            // basic.pause(1)
         }  
     }
 
@@ -671,56 +671,27 @@ class SH1106{
      * @param bg sets whether empty pixels of the image are drawn (drawn with `not color`)
      * @param toggle sets whether to use pixel switching instead of setting the pixel to a specific color (if `true`, `color` means nothing)
      */
-    drawImage(image: Image, x: number, y: number, color: boolean, bg: boolean, toggle: boolean): void {
+    drawImage(image: Image, x: number, y: number, fill: OLEDDisplayMode): void {
         if ((image != null) && (image != undefined)) {
+
             for (let img_x = 0; img_x < image.width(); img_x++) {
                 for (let img_y = 0; img_y < image.height(); img_y++) {
                     let c = image.pixel(img_x, img_y)
-                    if ((bg && !c) || (c)) {
-                        if (!color) {
-                            c = !c
-                        }
-                        if (toggle) {
-                            this.togglePixel(x + img_x, y + img_y)
-                        } else {
-                            this.setPixel(x + img_x, y + img_y, c)
-                        }
+                    if(fill==OLEDDisplayMode.Inverse){
+                        this.setPixel(x + img_x, y + img_y, !c)
+                    }else{
+                        this.setPixel(x + img_x, y + img_y, c)
                     }
+                    
                 }
-                basic.pause(1)
+                // basic.pause(1)
             }
-        }
-    }
-
-    /**
-     * Add character for function `draw text`.
-     * For example, if you add character "_" and call `draw text "a_b"`, it will draw "a", then your custom character, then "b".
-     * Drag `character image` from the same category into field `image`.
-     * @param image character image to add to custom charset
-     * @param char character name
-     */
-    addChar(image: Image, char: string): void {
-        if (char != "" && image != null && image != undefined) {
-            char = char[0]
-            let compressedChar: number[] = []
-            for (let y = 0; y < 11; y++) {
-                let tmp = 0x00
-                for (let x = 0; x < 8; x++) {
-                    if (image.pixel(x, y)) {
-                        tmp |= 0x01 << (7 - x)
-                    }
-                }
-                compressedChar.push(tmp)
-            }
-            this.charset.unshift(compressedChar)
-            this.charsetIndex.unshift(char)
         }
     }
 
     /**
      * Create image for `add character` function.
      */
-
     charImage(leds: string): Image {
         return <Image><any>leds
     }
