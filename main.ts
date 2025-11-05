@@ -531,12 +531,91 @@ namespace Microbit_Kit {
         _LCD1602.init()
     }
 
+    // L298N
+    //% blockId=L298N_MotorB block="L298N MOTORB IN3 | %_IN3 | IN4 | %_IN4 | run speed %speed"  
+    //% weight=70
+    //% inlineInputMode=inline
+    //% speed.min=-255 speed.max=255
+    //% _IN3.defl=MyDigitalPin.P2
+    //% _IN4.defl=MyDigitalPin.P3
+    //% speed.defl=100
+    //% group="L298N Motor Driver"
+    //% subcategory=Motor
+    //% _IN3.fieldEditor=pinpicker
+    //% _IN3.fieldOptions.columns=4
+    //% _IN4.fieldEditor=pinpicker
+    //% _IN4.fieldOptions.columns=4
+    //% color=#E53935
+    export function L298N_MotorB_run(_IN3: MyDigitalPin, _IN4: MyDigitalPin, speed: number): void {
+        let pwmPin = _IN3;
+        let dirPin = _IN4;
+        speed = speed * 4; // map 256 to 1024
 
+        if (speed >= 0) {
+            pins.digitalWritePin(dirPin, 1)
+            pins.analogWritePin(pwmPin, 1020 - speed)
+        }
+        else {
+            pins.digitalWritePin(dirPin, 0)
+            pins.analogWritePin(pwmPin, -speed)
+        }
+    }
 
-    
+    //% blockId=L298N_MotorA block="L298N MOTORA IN1 | %_IN1 | IN2 | %_IN2 | run speed %speed"  
+    //% inlineInputMode=inline
+    //% speed.min=-255 speed.max=255
+    //% _IN1.defl=MyDigitalPin.P0
+    //% _IN2.defl=MyDigitalPin.P1
+    //% speed.defl=100
+    //% group="L298N Motor Driver"
+    //% subcategory="Motor"
+    //% _IN1.fieldEditor=pinpicker
+    //% _IN1.fieldOptions.columns=4
+    //% _IN2.fieldEditor=pinpicker
+    //% _IN2.fieldOptions.columns=4
+    //% color=#E53935
+    export function L298N_MotorA_run(_IN1: MyDigitalPin, _IN2: MyDigitalPin, speed: number): void {
+        let pwmPin = _IN1;
+        let dirPin = _IN2;
+        speed = speed * 4; // map 256 to 1024
 
+        if (speed >= 0) {
+            pins.digitalWritePin(dirPin, 1)
+            pins.analogWritePin(pwmPin, 1020 - speed)
+        }
+        else {
+            pins.digitalWritePin(dirPin, 0)
+            pins.analogWritePin(pwmPin, -speed)
+        }
+    }
 
+    // Servo
+    //% blockId=Servo_180 block="180° Servo at %pin set angle %angle"  
+    //% angle.min=0 angle.max=180
+    //% pin.defl=MyDigitalPin.P0
+    //% angle.defl=90
+    //% group="Servo 180"
+    //% subcategory="Motor"
+    //% pin.fieldEditor=pinpicker
+    //% pin.fieldOptions.columns=4
+    //% color=#E53935
+    //% inlineInputMode=inline
+    export function Servo180_setAngle(pin: MyDigitalPin, angle: number): void {
+        pins.servoWritePin(pin, pins.map(angle, 0, 180, 0, 180))
+    }
 
-
-    
+    //% blockId=Servo_360 block="360° Servo at %pin set angle %angle"  
+    //% angle.min=0 angle.max=360
+    //% pin.defl=MyDigitalPin.P0
+    //% angle.defl=90
+    //% group="Servo 360"
+    //% subcategory="Motor"
+    //% pin.fieldEditor=pinpicker
+    //% pin.fieldOptions.columns=4
+    //% color=#E53935
+    //% inlineInputMode=inline
+    export function Servo360_setAngle(pin: MyDigitalPin, angle: number): void {
+        pins.servoWritePin(pin, pins.map(angle, 0, 360, 0, 180))
+    }
+ 
 }
