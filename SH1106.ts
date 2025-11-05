@@ -349,7 +349,7 @@ class SH1106{
             [0x00, 0x00, 0x00, 0x08, 0x08, 0x3E, 0x08, 0x08, 0x00, 0x00, 0x00],
             [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x08, 0x10, 0x00],
             [0x00, 0x00, 0x00, 0x00, 0x00, 0x7E, 0x00, 0x00, 0x00, 0x00, 0x00],
-            [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0x10, 0x00, 0x00],
+            [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x18, 0x18, 0x00, 0x00],
             [0x04, 0x04, 0x08, 0x08, 0x08, 0x10, 0x10, 0x10, 0x20, 0x20, 0x00],
             [0x00, 0x1C, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x1C, 0x00, 0x00],
             [0x00, 0x08, 0x18, 0x28, 0x08, 0x08, 0x08, 0x08, 0x3E, 0x00, 0x00],
@@ -429,8 +429,7 @@ class SH1106{
             [0x0C, 0x10, 0x10, 0x08, 0x30, 0x08, 0x10, 0x10, 0x10, 0x0C, 0x00],
             [0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x00],
             [0x30, 0x08, 0x08, 0x10, 0x0C, 0x10, 0x08, 0x08, 0x08, 0x30, 0x00],
-            //[0x00, 0x00, 0x00, 0x32, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
-            [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x18, 0x18, 0x00, 0x00]
+            [0x00, 0x00, 0x00, 0x32, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
         ]
 
         let line = 0
@@ -572,6 +571,92 @@ class SH1106{
                 this.togglePixel(pixel[0], pixel[1])
             } else {
                 this.setPixel(pixel[0], pixel[1], color)
+            }
+        }
+    }
+
+    drawCirclePoints(centerX: number, centerY: number, x: number, y: number, color: boolean): void {
+        const points = [
+            [centerX + x, centerY + y],
+            [centerX - x, centerY + y],
+            [centerX + x, centerY - y],
+            [centerX - x, centerY - y],
+            [centerX + y, centerY + x],
+            [centerX - y, centerY + x],
+            [centerX + y, centerY - x],
+            [centerX - y, centerY - x]
+        ]
+
+        for (const point of points) {
+            const px = point[0]
+            const py = point[1]
+            if (px >= 0 && px < 128 && py >= 0 && py < 64) {
+                this.setPixel(px, py, color)
+            }
+        }
+    }
+
+    drawCircle(centerX: number, centerY: number, radius: number, color: boolean): void {
+        // 边界检查
+        if (centerX < 0 || centerX >= 128 || centerY < 0 || centerY >= 64) {
+            return
+        }
+
+        let x = 0
+        let y = radius
+        let d = 3 - 2 * radius
+
+        // 绘制初始的8个点
+        this.drawCirclePoints(centerX, centerY, x, y, color)
+
+        while (y >= x) {
+            x++
+
+            if (d > 0) {
+                y--
+                d = d + 4 * (x - y) + 10
+            } else {
+                d = d + 4 * x + 6
+            }
+
+            this.drawCirclePoints(centerX, centerY, x, y, color)
+        }
+    }
+
+    drawSmoothCircle(centerX: number, centerY: number, radius: number, color: boolean): void {
+        if (centerX < 0 || centerX >= 128 || centerY < 0 || centerY >= 64) {
+            return
+        }
+
+        const radiusSquared = radius * radius
+        const antiAliasRadius = radius + 0.5
+        const antiAliasRadiusSquared = antiAliasRadius * antiAliasRadius
+
+        for (let y = -radius - 1; y <= radius + 1; y++) {
+            for (let x = -radius - 1; x <= radius + 1; x++) {
+                const distanceSquared = x * x + y * y
+
+                if (distanceSquared <= radiusSquared) {
+                    // 完全在圆内
+                    const px = centerX + x
+                    const py = centerY + y
+                    if (px >= 0 && px < 128 && py >= 0 && py < 64) {
+                        this.setPixel(px, py, color)
+                    }
+                } else if (distanceSquared <= antiAliasRadiusSquared) {
+                    // 抗锯齿区域 - 根据距离决定是否绘制
+                    const distance = Math.sqrt(distanceSquared)
+                    const alpha = 1 - (distance - radius)
+
+                    // 简单的抗锯齿：以一定概率绘制像素
+                    if (Math.random() < alpha) {
+                        const px = centerX + x
+                        const py = centerY + y
+                        if (px >= 0 && px < 128 && py >= 0 && py < 64) {
+                            this.setPixel(px, py, color)
+                        }
+                    }
+                }
             }
         }
     }

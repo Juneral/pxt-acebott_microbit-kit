@@ -306,15 +306,39 @@ namespace Microbit_Kit {
     let OLEDInit = false;
     let OLED:SH1106;
 
-    //% blockId=OLED_drawRect block="OLED drawRect from (%x1,%y1) to (%x2,%y3) with fill %fill"
+    //% blockId=OLED_drawCircle block="OLED draw circle at (%x,%y) with radius %radius and fill %fill"
     //% subcategory="1.3 inch OLED"
     //% x.min=0 x.max=127 y.min=0 y.max=63
     //% fill.defl=false
+    //% inlineInputMode=inline
+    export function OLED_drawCircle(x: number, y: number, radius: number, fill: boolean): void {
+        if(fill){
+            OLED.drawSmoothCircle(x,y,radius,true)
+        }
+        else{
+            OLED.drawCircle(x,y,radius,true)
+        }
+    }
+
+    //% blockId=OLED_drawRect block="OLED draw rectangle from (%x1,%y1) to (%x2,%y2) with fill %fill"
+    //% subcategory="1.3 inch OLED"
+    //% x1.min=0 x1.max=127 y1.min=0 y1.max=63
+    //% x2.min=0 x2.max=127 y2.min=0 y2.max=63
+    //% fill.defl=false
+    //% inlineInputMode=inline
     export function OLED_drawRect(x1: number, y1: number, x2: number, y2: number, fill: boolean): void {
         OLED.drawRect(x1, y1, x2, y2, true, fill, false)
     }
-    
 
+    //% blockId=OLED_drawLine block="OLED draw line from (%x1,%y1) to (%x2,%y2)"
+    //% subcategory="1.3 inch OLED"
+    //% x1.min=0 x1.max=127 y1.min=0 y1.max=63
+    //% x2.min=0 x2.max=127 y2.min=0 y2.max=63
+    //% inlineInputMode=inline
+    export function OLED_drawLine(x1: number, y1: number, x2: number, y2: number): void {
+        OLED.drawLine(x1, y1, x2, y2,true,false)
+    }
+    
     //% blockId=OLED_SetPixel block="OLED set pixel at (%x,%y) to %color"
     //% subcategory="1.3 inch OLED"
     //% x.min=0 x.max=127 y.min=0 y.max=63
