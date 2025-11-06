@@ -80,7 +80,7 @@ namespace Acebott_Microbit_Kit {
     
     //% blockId=LED_Module block="LED at %pin| is %status"   group="LED"
     //% subcategory=Module
-    //% pin.fieldEditor=pinpicker
+    //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     export function myLED(pin: MyDigitalPin, status: LED): void {
         pins.digitalWritePin(pin, status)
@@ -110,7 +110,7 @@ namespace Acebott_Microbit_Kit {
     //% blockId=Button block="Button at %pin is pressed" 
     //% group="Button"
     //% subcategory=Module
-    //% pin.fieldEditor=pinpicker
+    //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     export function myButton(pin: MyDigitalPin): boolean {
         pins.setPull(pin, PinPullMode.PullUp)
@@ -120,7 +120,7 @@ namespace Acebott_Microbit_Kit {
     //% blockId=Joystick_Button block="Joystick button at %pin is pressed"
     //% subcategory=Module
     //% group="Joystick"
-    //% pin.fieldEditor=pinpicker
+    //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     //% pin.defl=MyDigitalPin.P2
     export function myJoystickButton(pin: MyDigitalPin): boolean {
@@ -131,7 +131,7 @@ namespace Acebott_Microbit_Kit {
     //% blockId=Joystick_Y block="Joystick Y-axis at %pin get value"
     //% subcategory=Module
     //% group="Joystick"
-    //% pin.fieldEditor=pinpicker
+    //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=3
     //% pin.defl=MyAnalogPin.P1
     export function myJoystick_Y(pin: MyAnalogPin): number {
@@ -141,7 +141,7 @@ namespace Acebott_Microbit_Kit {
     //% blockId=Joystick_X block="Joystick X-axis at %pin get value"
     //% subcategory=Module
     //% group="Joystick"
-    //% pin.fieldEditor=pinpicker
+    //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=3
     //% pin.defl=MyAnalogPin.P0
     export function myJoystick_X(pin: MyAnalogPin): number {
@@ -151,7 +151,7 @@ namespace Acebott_Microbit_Kit {
     //% blockId=Light_Sensor block="Light Sensor at %pin get value"
     //% subcategory=Sensor
     //% group="Light Sensor"
-    //% pin.fieldEditor=pinpicker
+    //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=3
     export function myLightSensor(pin: MyAnalogPin): number {
         return pins.analogReadPin(pin)
@@ -160,7 +160,7 @@ namespace Acebott_Microbit_Kit {
     //% blockId=Sound_Sensor block="Sound Sensor at %pin get value"
     //% subcategory=Sensor
     //% group="Sound Sensor"
-    //% pin.fieldEditor=pinpicker
+    //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=3
     export function mySoundSensor(pin: MyAnalogPin): number {
         return pins.analogReadPin(pin)
@@ -169,7 +169,7 @@ namespace Acebott_Microbit_Kit {
     //% blockId=Tilt_Sensor block="Tilt Sensor at %pin is tilted" 
     //% subcategory=Sensor
     //% group="Tilt Sensor"
-    //% pin.fieldEditor=pinpicker
+    //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     export function myTiltSensor(pin: MyDigitalPin): boolean {
         return pins.digitalReadPin(pin) == 1 ? true : false;
@@ -178,7 +178,7 @@ namespace Acebott_Microbit_Kit {
     //% blockId=Soil_Moisture_Sensor_Digital block="Soil Moisture Sensor at %pin digital value"
     //% subcategory=Sensor
     //% group="Soil Moisture Sensor"
-    //% pin.fieldEditor=pinpicker
+    //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     export function mySoilMoistureSensor_digitalValue(pin: MyDigitalPin): boolean {
         return pins.digitalReadPin(pin) == 1 ? true : false;
@@ -187,7 +187,7 @@ namespace Acebott_Microbit_Kit {
     //% blockId=Soil_Moisture_Sensor_Analog block="Soil Moisture Sensor at %pin analog value"
     //% subcategory=Sensor
     //% group="Soil Moisture Sensor"
-    //% pin.fieldEditor=pinpicker
+    //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=3
     export function mySoilMoistureSensor_analogValue(pin: MyAnalogPin): number {
         return pins.analogReadPin(pin)
@@ -196,7 +196,7 @@ namespace Acebott_Microbit_Kit {
     //% blockId=Infrared_Obstacle_Avoidance_Sensor block="Infrared Obstacle Avoidance Sensor at %pin digital value"
     //% subcategory=Sensor
     //% group="Infrared Obstacle Avoidance Sensor"
-    //% pin.fieldEditor=pinpicker
+    //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     export function myInfrared_Obstacle_Avoidance_Sensor(pin: MyDigitalPin): boolean {
         return pins.digitalReadPin(pin) == 0 ? true : false;
@@ -204,7 +204,7 @@ namespace Acebott_Microbit_Kit {
 
     //% blockId=Relay block="Relay at %pin is %status"   group="Relay"
     //% subcategory=Module
-    //% pin.fieldEditor=pinpicker
+    //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     export function myRelay(pin: MyDigitalPin, status: RELAY): void {
         pins.digitalWritePin(pin, status)
@@ -213,9 +213,9 @@ namespace Acebott_Microbit_Kit {
     //% blockId=Ultrasonic_Sensor block="Ultrasonic Sensor ECHO at %epin TRIG at is %tpin get distance in %unit"
     //% subcategory=Sensor
     //% group="Ultrasonic Sensor"
-    //% epin.fieldEditor=pinpicker
+    //% epin.fieldEditor="gridpicker"
     //% epin.fieldOptions.columns=4
-    //% tpin.fieldEditor=pinpicker
+    //% tpin.fieldEditor="gridpicker"
     //% tpin.fieldOptions.columns=4
     //% epin.defl=MyDigitalPin.P0
     //% tpin.defl=MyDigitalPin.P1
@@ -300,6 +300,91 @@ namespace Acebott_Microbit_Kit {
             BH1745ColorInit = true
         }
         return BH1745.getValue(type)
+    }
+
+    // L298N
+    //% blockId=L298N_MotorB block="L298N MOTORB IN3 | %_IN3 | IN4 | %_IN4 | run speed %speed"  
+    //% weight=70
+    //% inlineInputMode=inline
+    //% speed.min=-255 speed.max=255
+    //% _IN3.defl=MyDigitalPin.P2
+    //% _IN4.defl=MyDigitalPin.P3
+    //% speed.defl=100
+    //% group="L298N Motor Driver"
+    //% subcategory=Motor
+    //% _IN3.fieldEditor="gridpicker"
+    //% _IN3.fieldOptions.columns=4
+    //% _IN4.fieldEditor="gridpicker"
+    //% _IN4.fieldOptions.columns=4
+    //% color=#E53935
+    export function L298N_MotorB_run(_IN3: MyDigitalPin, _IN4: MyDigitalPin, speed: number): void {
+        let pwmPin = _IN3;
+        let dirPin = _IN4;
+        speed = speed * 4; // map 256 to 1024
+
+        if (speed >= 0) {
+            pins.digitalWritePin(dirPin, 1)
+            pins.analogWritePin(pwmPin, 1020 - speed)
+        }
+        else {
+            pins.digitalWritePin(dirPin, 0)
+            pins.analogWritePin(pwmPin, -speed)
+        }
+    }
+
+    //% blockId=L298N_MotorA block="L298N MOTORA IN1 | %_IN1 | IN2 | %_IN2 | run speed %speed"  
+    //% inlineInputMode=inline
+    //% speed.min=-255 speed.max=255
+    //% _IN1.defl=MyDigitalPin.P0
+    //% _IN2.defl=MyDigitalPin.P1
+    //% speed.defl=100
+    //% group="L298N Motor Driver"
+    //% subcategory="Motor"
+    //% _IN1.fieldEditor="gridpicker"
+    //% _IN1.fieldOptions.columns=4
+    //% _IN2.fieldEditor="gridpicker"
+    //% _IN2.fieldOptions.columns=4
+    //% color=#E53935
+    export function L298N_MotorA_run(_IN1: MyDigitalPin, _IN2: MyDigitalPin, speed: number): void {
+        let pwmPin = _IN1;
+        let dirPin = _IN2;
+        speed = speed * 4; // map 256 to 1024
+
+        if (speed >= 0) {
+            pins.digitalWritePin(dirPin, 1)
+            pins.analogWritePin(pwmPin, 1020 - speed)
+        }
+        else {
+            pins.digitalWritePin(dirPin, 0)
+            pins.analogWritePin(pwmPin, -speed)
+        }
+    }
+
+    // Servo
+    //% blockId=Servo_180 block="180° Servo at %pin set angle %angle"  
+    //% angle.min=0 angle.max=180
+    //% angle.defl=90
+    //% group="Servo 180"
+    //% subcategory="Motor"
+    //% pin.fieldEditor="gridpicker"
+    //% pin.fieldOptions.columns=4
+    //% color=#E53935
+    //% inlineInputMode=inline
+    export function Servo180_setAngle(pin: MyDigitalPin, angle: number): void {
+        pins.servoWritePin(pin, pins.map(angle, 0, 180, 0, 180))
+    }
+
+    //% blockId=Servo_360 block="360° Servo at %pin set angle %angle"  
+    //% angle.min=0 angle.max=360
+    //% angle.defl=90
+    //% group="Servo 360"
+    //% subcategory="Motor"
+    //% pin.fieldEditor="gridpicker"
+    //% pin.fieldOptions.columns=4
+    //% color=#E53935
+    //% inlineInputMode=inline
+    export function Servo360_setAngle(pin: MyDigitalPin, angle: number): void {
+        pins.servoWritePin(pin, pins.map(angle, 0, 360, 0, 180))
     }
 
     // SH1106 OLED 128*64 Driver Block
@@ -530,90 +615,4 @@ namespace Acebott_Microbit_Kit {
         }
         _LCD1602.init()
     }
-
-    // L298N
-    //% blockId=L298N_MotorB block="L298N MOTORB IN3 | %_IN3 | IN4 | %_IN4 | run speed %speed"  
-    //% weight=70
-    //% inlineInputMode=inline
-    //% speed.min=-255 speed.max=255
-    //% _IN3.defl=MyDigitalPin.P2
-    //% _IN4.defl=MyDigitalPin.P3
-    //% speed.defl=100
-    //% group="L298N Motor Driver"
-    //% subcategory=Motor
-    //% _IN3.fieldEditor=pinpicker
-    //% _IN3.fieldOptions.columns=4
-    //% _IN4.fieldEditor=pinpicker
-    //% _IN4.fieldOptions.columns=4
-    //% color=#E53935
-    export function L298N_MotorB_run(_IN3: MyDigitalPin, _IN4: MyDigitalPin, speed: number): void {
-        let pwmPin = _IN3;
-        let dirPin = _IN4;
-        speed = speed * 4; // map 256 to 1024
-
-        if (speed >= 0) {
-            pins.digitalWritePin(dirPin, 1)
-            pins.analogWritePin(pwmPin, 1020 - speed)
-        }
-        else {
-            pins.digitalWritePin(dirPin, 0)
-            pins.analogWritePin(pwmPin, -speed)
-        }
-    }
-
-    //% blockId=L298N_MotorA block="L298N MOTORA IN1 | %_IN1 | IN2 | %_IN2 | run speed %speed"  
-    //% inlineInputMode=inline
-    //% speed.min=-255 speed.max=255
-    //% _IN1.defl=MyDigitalPin.P0
-    //% _IN2.defl=MyDigitalPin.P1
-    //% speed.defl=100
-    //% group="L298N Motor Driver"
-    //% subcategory="Motor"
-    //% _IN1.fieldEditor=pinpicker
-    //% _IN1.fieldOptions.columns=4
-    //% _IN2.fieldEditor=pinpicker
-    //% _IN2.fieldOptions.columns=4
-    //% color=#E53935
-    export function L298N_MotorA_run(_IN1: MyDigitalPin, _IN2: MyDigitalPin, speed: number): void {
-        let pwmPin = _IN1;
-        let dirPin = _IN2;
-        speed = speed * 4; // map 256 to 1024
-
-        if (speed >= 0) {
-            pins.digitalWritePin(dirPin, 1)
-            pins.analogWritePin(pwmPin, 1020 - speed)
-        }
-        else {
-            pins.digitalWritePin(dirPin, 0)
-            pins.analogWritePin(pwmPin, -speed)
-        }
-    }
-
-    // Servo
-    //% blockId=Servo_180 block="180° Servo at %pin set angle %angle"  
-    //% angle.min=0 angle.max=180
-    //% angle.defl=90
-    //% group="Servo 180"
-    //% subcategory="Motor"
-    //% pin.fieldEditor=pinpicker
-    //% pin.fieldOptions.columns=4
-    //% color=#E53935
-    //% inlineInputMode=inline
-    export function Servo180_setAngle(pin: MyDigitalPin, angle: number): void {
-        pins.servoWritePin(pin, pins.map(angle, 0, 180, 0, 180))
-    }
-
-    //% blockId=Servo_360 block="360° Servo at %pin set angle %angle"  
-    //% angle.min=0 angle.max=360
-    //% angle.defl=90
-    //% group="Servo 360"
-    //% subcategory="Motor"
-    //% pin.fieldEditor=pinpicker
-    //% pin.fieldOptions.columns=4
-    //% color=#E53935
-    //% inlineInputMode=inline
-    export function Servo360_setAngle(pin: MyDigitalPin, angle: number): void {
-        pins.servoWritePin(pin, pins.map(angle, 0, 360, 0, 180))
-    }
- 
 }
