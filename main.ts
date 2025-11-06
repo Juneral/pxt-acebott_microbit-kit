@@ -412,6 +412,7 @@ namespace Acebott_Microbit_Kit {
     //% blockId="LCD1602_Makecharacter"
     //% block="LCD1602 create custom character %char_index|%im"
     //% subcategory="LCD1602"
+    //% color=purple
     export function LCD1602_CreateCharacter(char_index: CharIndex, im: Image): void {
         const customChar = [0, 0, 0, 0, 0, 0, 0, 0];
         for (let y = 0; y < 8; y++) {
@@ -432,6 +433,7 @@ namespace Acebott_Microbit_Kit {
     //% imageLiteralScale=0.6
     //% shim=images::createImage
     //% subcategory="LCD1602"
+    //% color=purple
     export function LCD1602_CharacterPixels(i: string): Image {
         return <Image><any>i;
     }
@@ -441,6 +443,7 @@ namespace Acebott_Microbit_Kit {
     //% x.min=0 x.max=15
     //% y.min=0 y.max=1
     //% subcategory="LCD1602"
+    //% color=purple
     export function LCD1602_Showchararacter(x: number, y: number, char_index: CharIndex): void {
         let a: number
         if (y > 0)
@@ -461,6 +464,7 @@ namespace Acebott_Microbit_Kit {
     //% y.min=0 y.max=1
     //% s.defl="Hello,Acebott!"
     //% subcategory="LCD1602"
+    //% color=purple
     export function LCD1602_ShowString(x: number, y: number, s: string): void {
         let a: number
 
@@ -480,6 +484,7 @@ namespace Acebott_Microbit_Kit {
     //% x.min=0 x.max=15
     //% y.min=0 y.max=1
     //% subcategory="LCD1602"
+    //% color=purple
     export function LCD1602_ShowNumber(x: number, y: number, n: number): void {
         let s = n.toString()
         _LCD1602.ShowString(x, y, s)
@@ -487,12 +492,14 @@ namespace Acebott_Microbit_Kit {
 
     //% blockId="LCD1602_Clear" block="LCD1602 clear screen"
     //% subcategory="LCD1602"
+    //% color=purple
     export function LCD1602_Clear(): void {
         _LCD1602.ClearScreen()
     }
 
     //% blockId=LCD1602_Init block="LCD1602 Init"
     //% subcategory="LCD1602"
+    //% color=purple
     export function LCD1602_Init(): void {
         if (!LCD1602Init) {
             _LCD1602 = new LCD1602()
@@ -540,6 +547,7 @@ namespace Acebott_Microbit_Kit {
     //% blockId=OLED_drawCircle block="OLED draw circle at (%x,%y) with radius %radius and fill %fill"
     //% subcategory="1.3 inch OLED"
     //% x.min=0 x.max=127 y.min=0 y.max=63
+    //% x.defl=63 y.defl=31 radius.defl=20
     //% fill.defl=false
     //% inlineInputMode=inline
     export function OLED_drawCircle(x: number, y: number, radius: number, fill: boolean): void {
@@ -555,6 +563,7 @@ namespace Acebott_Microbit_Kit {
     //% subcategory="1.3 inch OLED"
     //% x1.min=0 x1.max=127 y1.min=0 y1.max=63
     //% x2.min=0 x2.max=127 y2.min=0 y2.max=63
+    //% x2.defl=127 y2.defl=63
     //% fill.defl=false
     //% inlineInputMode=inline
     export function OLED_drawRect(x1: number, y1: number, x2: number, y2: number, fill: boolean): void {
@@ -565,6 +574,7 @@ namespace Acebott_Microbit_Kit {
     //% subcategory="1.3 inch OLED"
     //% x1.min=0 x1.max=127 y1.min=0 y1.max=63
     //% x2.min=0 x2.max=127 y2.min=0 y2.max=63
+    //% x2.defl=127 y2.defl=63
     //% inlineInputMode=inline
     export function OLED_drawLine(x1: number, y1: number, x2: number, y2: number): void {
         OLED.drawLine(x1, y1, x2, y2,true,false)
@@ -594,6 +604,7 @@ namespace Acebott_Microbit_Kit {
     //% blockId=OLED_drawText block="OLED draw text %text at (%x,%y)| with color %mode %size"
     //% subcategory="1.3 inch OLED"
     //% x.min=0 x.max=127 y.min=0 y.max=63
+    //% text.defl="Hello,Acebott!"
     //% mode.defl=OLEDDisplayMode.Normal
     //% inlineInputMode=inline
     export function OLED_drawText(text: string, x: number, y: number, mode: OLEDDisplayMode, size: OLEDFontSize): void {
