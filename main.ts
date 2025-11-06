@@ -75,13 +75,14 @@ const enum MyAnalogPin {
     P10 = 110
 }
 
-//% color="#31C7D5" weight=10 icon="\uf2db" block="Acebott Microbit Kit"
+//% color=#1E90FF weight=10 icon="\uf2db" block="Acebott Microbit Kit"
 namespace Acebott_Microbit_Kit {
     
     //% blockId=LED_Module block="LED at %pin| is %status"   group="LED"
     //% subcategory=Module
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
+    //% color=#FF6633
     export function myLED(pin: MyDigitalPin, status: LED): void {
         pins.digitalWritePin(pin, status)
     }
@@ -101,6 +102,7 @@ namespace Acebott_Microbit_Kit {
     //% bpin.defl=MyDigitalPin.P2
     //% inlineInputMode=inline
     //% subcategory=Module
+    //% color=#FF6633
     export function myRGB(rpin: MyDigitalPin, rv: number, gpin: MyDigitalPin, gv: number, bpin: MyDigitalPin, bv: number): void {
         pins.analogWritePin(rpin, rv)
         pins.analogWritePin(gpin, gv)
@@ -112,6 +114,7 @@ namespace Acebott_Microbit_Kit {
     //% subcategory=Module
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
+    //% color=#FF6633
     export function myButton(pin: MyDigitalPin): boolean {
         pins.setPull(pin, PinPullMode.PullUp)
         return pins.digitalReadPin(pin) == 0 ? true : false;
@@ -123,6 +126,7 @@ namespace Acebott_Microbit_Kit {
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     //% pin.defl=MyDigitalPin.P2
+    //% color=#FF6633
     export function myJoystickButton(pin: MyDigitalPin): boolean {
         pins.setPull(pin, PinPullMode.PullUp)
         return pins.digitalReadPin(pin) == 0 ? true : false;
@@ -134,12 +138,14 @@ namespace Acebott_Microbit_Kit {
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=3
     //% pin.defl=MyAnalogPin.P1
+    //% color=#FF6633
     export function myJoystick_Y(pin: MyAnalogPin): number {
         return pins.analogReadPin(pin)
     }
 
     //% blockId=Joystick_X block="Joystick X-axis at %pin get value"
     //% subcategory=Module
+    //% color=#FF6633
     //% group="Joystick"
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=3
@@ -153,6 +159,7 @@ namespace Acebott_Microbit_Kit {
     //% group="Light Sensor"
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=3
+    //% color=#009900
     export function myLightSensor(pin: MyAnalogPin): number {
         return pins.analogReadPin(pin)
     }
@@ -162,6 +169,7 @@ namespace Acebott_Microbit_Kit {
     //% group="Sound Sensor"
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=3
+    //% color=#009900
     export function mySoundSensor(pin: MyAnalogPin): number {
         return pins.analogReadPin(pin)
     }
@@ -171,6 +179,7 @@ namespace Acebott_Microbit_Kit {
     //% group="Tilt Sensor"
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
+    //% color=#009900
     export function myTiltSensor(pin: MyDigitalPin): boolean {
         return pins.digitalReadPin(pin) == 1 ? true : false;
     }
@@ -180,6 +189,7 @@ namespace Acebott_Microbit_Kit {
     //% group="Soil Moisture Sensor"
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
+    //% color=#009900
     export function mySoilMoistureSensor_digitalValue(pin: MyDigitalPin): boolean {
         return pins.digitalReadPin(pin) == 1 ? true : false;
     }
@@ -189,6 +199,7 @@ namespace Acebott_Microbit_Kit {
     //% group="Soil Moisture Sensor"
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=3
+    //% color=#009900
     export function mySoilMoistureSensor_analogValue(pin: MyAnalogPin): number {
         return pins.analogReadPin(pin)
     }
@@ -198,6 +209,7 @@ namespace Acebott_Microbit_Kit {
     //% group="Infrared Obstacle Avoidance Sensor"
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
+    //% color=#009900
     export function myInfrared_Obstacle_Avoidance_Sensor(pin: MyDigitalPin): boolean {
         return pins.digitalReadPin(pin) == 0 ? true : false;
     }
@@ -206,6 +218,7 @@ namespace Acebott_Microbit_Kit {
     //% subcategory=Module
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
+    //% color=#FF6633
     export function myRelay(pin: MyDigitalPin, status: RELAY): void {
         pins.digitalWritePin(pin, status)
     }
@@ -219,6 +232,7 @@ namespace Acebott_Microbit_Kit {
     //% tpin.fieldOptions.columns=4
     //% epin.defl=MyDigitalPin.P0
     //% tpin.defl=MyDigitalPin.P1
+    //% color=#009900
     export function UltrasonicDistance(epin: MyDigitalPin, tpin: MyDigitalPin, unit: DistanceUnit): number {
         // send pulse
         pins.setPull(tpin, PinPullMode.PullNone)
@@ -256,6 +270,7 @@ namespace Acebott_Microbit_Kit {
     //% subcategory=Sensor
     //% group="Barometric Pressure Sensor"
     //% weight=80 blockGap=8
+    //% color=#009900
     export function BMP280_getTemperature(): number {
         if (!BMP280Init) {
             _BMP280 = new BMP280();
@@ -268,6 +283,7 @@ namespace Acebott_Microbit_Kit {
     //% subcategory=Sensor
     //% group="Barometric Pressure Sensor"
     //% weight=80 blockGap=8
+    //% color=#009900
     export function BMP280_getPressure(): number {
         if (!BMP280Init) {
             _BMP280 = new BMP280();
@@ -282,7 +298,7 @@ namespace Acebott_Microbit_Kit {
     //% blockId=Color_Sensor_Update block="Color Sensor update value"
     //% subcategory=Sensor
     //% group="Color Sensor"
-    //% weight=53 color=#49CEF7
+    //% color=#009900
     export function Color_Sensor_Update(): void {
         if (!BH1745ColorInit) {
             BH1745 = new BH1745NUC()
@@ -293,7 +309,8 @@ namespace Acebott_Microbit_Kit {
 
     //% blockId=Color_Sensor_getValue block="Color Sensor get %type value"
     //% subcategory=Sensor
-    //% group="Color Sensor" weight=52 color=#49CEF7
+    //% group="Color Sensor"
+    //% color=#009900
     export function ColorSensor_getValue(type: ColorType): number {
         if (!BH1745ColorInit) {
             BH1745 = new BH1745NUC()
@@ -302,20 +319,21 @@ namespace Acebott_Microbit_Kit {
         return BH1745.getValue(type)
     }
 
+
+
     // L298N
-    //% blockId=L298N_MotorB block="L298N MOTORB IN3 | %_IN3 | IN4 | %_IN4 | run speed %speed"  
-    //% weight=70
+    //% blockId=L298N_MotorB block="L298N MOTORB IN3 | %_IN3 | IN4 | %_IN4 | run speed %speed" 
     //% inlineInputMode=inline
-    //% speed.min=-255 speed.max=255
-    //% _IN3.defl=MyDigitalPin.P2
-    //% _IN4.defl=MyDigitalPin.P3
-    //% speed.defl=100
-    //% group="L298N Motor Driver"
-    //% subcategory=Motor
     //% _IN3.fieldEditor="gridpicker"
     //% _IN3.fieldOptions.columns=4
     //% _IN4.fieldEditor="gridpicker"
     //% _IN4.fieldOptions.columns=4
+    //% _IN3.defl=MyDigitalPin.P2
+    //% _IN4.defl=MyDigitalPin.P3
+    //% speed.min=-255 speed.max=255
+    //% speed.defl=100
+    //% subcategory=Motor/Servo
+    //% group="L298N Motor Driver"
     //% color=#E53935
     export function L298N_MotorB_run(_IN3: MyDigitalPin, _IN4: MyDigitalPin, speed: number): void {
         let pwmPin = _IN3;
@@ -334,16 +352,16 @@ namespace Acebott_Microbit_Kit {
 
     //% blockId=L298N_MotorA block="L298N MOTORA IN1 | %_IN1 | IN2 | %_IN2 | run speed %speed"  
     //% inlineInputMode=inline
-    //% speed.min=-255 speed.max=255
-    //% _IN1.defl=MyDigitalPin.P0
-    //% _IN2.defl=MyDigitalPin.P1
-    //% speed.defl=100
-    //% group="L298N Motor Driver"
-    //% subcategory="Motor"
     //% _IN1.fieldEditor="gridpicker"
     //% _IN1.fieldOptions.columns=4
     //% _IN2.fieldEditor="gridpicker"
     //% _IN2.fieldOptions.columns=4
+    //% _IN1.defl=MyDigitalPin.P0
+    //% _IN2.defl=MyDigitalPin.P1
+    //% speed.min=-255 speed.max=255
+    //% speed.defl=100
+    //% subcategory=Motor/Servo
+    //% group="L298N Motor Driver"
     //% color=#E53935
     export function L298N_MotorA_run(_IN1: MyDigitalPin, _IN2: MyDigitalPin, speed: number): void {
         let pwmPin = _IN1;
@@ -365,7 +383,7 @@ namespace Acebott_Microbit_Kit {
     //% angle.min=0 angle.max=180
     //% angle.defl=90
     //% group="Servo 180"
-    //% subcategory="Motor"
+    //% subcategory=Motor/Servo
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     //% color=#E53935
@@ -374,17 +392,113 @@ namespace Acebott_Microbit_Kit {
         pins.servoWritePin(pin, pins.map(angle, 0, 180, 0, 180))
     }
 
-    //% blockId=Servo_360 block="360° Servo at %pin set angle %angle"  
-    //% angle.min=0 angle.max=360
+    //% blockId=Servo_360 block="360° Servo at %pin set speed %speed"  
+    //% speed.min=-180 speed.max=180
     //% angle.defl=90
     //% group="Servo 360"
-    //% subcategory="Motor"
+    //% subcategory=Motor/Servo
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     //% color=#E53935
     //% inlineInputMode=inline
-    export function Servo360_setAngle(pin: MyDigitalPin, angle: number): void {
-        pins.servoWritePin(pin, pins.map(angle, 0, 360, 0, 180))
+    export function Servo360_setSpeed(pin: MyDigitalPin, speed: number): void {
+        pins.servoWritePin(pin, pins.map(speed, -180, 180, 180, 0))
+    }
+
+    // LCD1602 Block Driver
+    let LCD1602Init = false;
+    let _LCD1602: LCD1602;
+
+    //% blockId="LCD1602_Makecharacter"
+    //% block="LCD1602 create custom character %char_index|%im"
+    //% subcategory="LCD1602"
+    export function LCD1602_CreateCharacter(char_index: CharIndex, im: Image): void {
+        const customChar = [0, 0, 0, 0, 0, 0, 0, 0];
+        for (let y = 0; y < 8; y++) {
+            for (let x = 0; x < 5; x++) {
+                if (im.pixel(x, y)) {
+                    customChar[y] |= 1 << (4 - x)
+                }
+            }
+        }
+        _LCD1602.Custom_Char[char_index] = customChar;
+    }
+
+    //% blockId="LCD1602_Characterpixels"
+    //% block="Custom character"
+    //% imageLiteral=1
+    //% imageLiteralColumns=5
+    //% imageLiteralRows=8
+    //% imageLiteralScale=0.6
+    //% shim=images::createImage
+    //% subcategory="LCD1602"
+    export function LCD1602_CharacterPixels(i: string): Image {
+        return <Image><any>i;
+    }
+
+    //% blockId="LCD1602_Showchararacter"
+    //% block="LCD1602 at (x:|%x|,y:|%y) show custom character|%char_index"
+    //% x.min=0 x.max=15
+    //% y.min=0 y.max=1
+    //% subcategory="LCD1602"
+    export function LCD1602_Showchararacter(x: number, y: number, char_index: CharIndex): void {
+        let a: number
+        if (y > 0)
+            a = 0xC0
+        else
+            a = 0x80
+        a += x
+        _LCD1602.cmd(0x40 | (char_index << 3));
+        for (let y = 0; y < 8; y++) {
+            _LCD1602.dat(_LCD1602.Custom_Char[char_index][y]);
+        }
+        _LCD1602.cmd(a)
+        _LCD1602.dat(char_index)
+
+    }
+    //% blockId="LCD1602_ShowString" block="LCD1602 at (x:|%x|,y:|%y) show string|%s|"
+    //% x.min=0 x.max=15
+    //% y.min=0 y.max=1
+    //% s.defl="Hello,Acebott!"
+    //% subcategory="LCD1602"
+    export function LCD1602_ShowString(x: number, y: number, s: string): void {
+        let a: number
+
+        if (y > 0)
+            a = 0xC0
+        else
+            a = 0x80
+        a += x
+        _LCD1602.cmd(a)
+
+        for (let i = 0; i < s.length; i++) {
+            _LCD1602.dat(s.charCodeAt(i))
+        }
+    }
+
+    //% blockId="LCD16202_ShowNumber" block="LCD1602 at (x:|%x|,y:|%y) show number|%n|"
+    //% x.min=0 x.max=15
+    //% y.min=0 y.max=1
+    //% subcategory="LCD1602"
+    export function LCD1602_ShowNumber(x: number, y: number, n: number): void {
+        let s = n.toString()
+        _LCD1602.ShowString(x, y, s)
+    }
+
+    //% blockId="LCD1602_Clear" block="LCD1602 clear screen"
+    //% subcategory="LCD1602"
+    export function LCD1602_Clear(): void {
+        _LCD1602.ClearScreen()
+    }
+
+    //% blockId=LCD1602_Init block="LCD1602 Init"
+    //% subcategory="LCD1602"
+    export function LCD1602_Init(): void {
+        if (!LCD1602Init) {
+            _LCD1602 = new LCD1602()
+            LCD1602Init = true
+        }
+        _LCD1602.init()
     }
 
     // SH1106 OLED 128*64 Driver Block
@@ -518,101 +632,5 @@ namespace Acebott_Microbit_Kit {
             OLEDInit = true
         }
         OLED.init()
-    }
-
-    // LCD1602 Block Driver
-    let LCD1602Init = false;
-    let _LCD1602: LCD1602;
-
-    //% blockId="LCD1602_Makecharacter"
-    //% block="LCD1602 create custom character %char_index|%im"
-    //% subcategory="LCD1602"
-    export function LCD1602_CreateCharacter(char_index: CharIndex, im: Image): void {
-        const customChar = [0, 0, 0, 0, 0, 0, 0, 0];
-        for (let y = 0; y < 8; y++) {
-            for (let x = 0; x < 5; x++) {
-                if (im.pixel(x, y)) {
-                    customChar[y] |= 1 << (4 - x)
-                }
-            }
-        }
-        _LCD1602.Custom_Char[char_index] = customChar;
-    }
-
-    //% blockId="LCD1602_Characterpixels"
-    //% block="Custom character"
-    //% imageLiteral=1
-    //% imageLiteralColumns=5
-    //% imageLiteralRows=8
-    //% imageLiteralScale=0.6
-    //% shim=images::createImage
-    //% subcategory="LCD1602"
-    export function LCD1602_CharacterPixels(i: string): Image {
-        return <Image><any>i;
-    }
-
-    //% blockId="LCD1602_Showchararacter"
-    //% block="LCD1602 at (x:|%x|,y:|%y) show custom character|%char_index"
-    //% x.min=0 x.max=15
-    //% y.min=0 y.max=1
-    //% subcategory="LCD1602"
-    export function LCD1602_Showchararacter(x: number, y: number, char_index: CharIndex): void {
-        let a: number
-        if (y > 0)
-            a = 0xC0
-        else
-            a = 0x80
-        a += x
-        _LCD1602.cmd(0x40 | (char_index << 3));
-        for (let y = 0; y < 8; y++) {
-            _LCD1602.dat(_LCD1602.Custom_Char[char_index][y]);
-        }
-        _LCD1602.cmd(a)
-        _LCD1602.dat(char_index)
-
-    }
-    //% blockId="LCD1602_ShowString" block="LCD1602 at (x:|%x|,y:|%y) show string|%s|"
-    //% x.min=0 x.max=15
-    //% y.min=0 y.max=1
-    //% s.defl="Hello,Acebott!"
-    //% subcategory="LCD1602"
-    export function LCD1602_ShowString(x: number, y: number, s: string): void {
-        let a: number
-
-        if (y > 0)
-            a = 0xC0
-        else
-            a = 0x80
-        a += x
-        _LCD1602.cmd(a)
-
-        for (let i = 0; i < s.length; i++) {
-            _LCD1602.dat(s.charCodeAt(i))
-        }
-    }
-
-    //% blockId="LCD16202_ShowNumber" block="LCD1602 at (x:|%x|,y:|%y) show number|%n|"
-    //% x.min=0 x.max=15
-    //% y.min=0 y.max=1
-    //% subcategory="LCD1602"
-    export function LCD1602_ShowNumber(x: number, y: number, n: number): void {
-        let s = n.toString()
-        _LCD1602.ShowString(x, y, s)
-    }
-
-    //% blockId="LCD1602_Clear" block="LCD1602 clear screen"
-    //% subcategory="LCD1602"
-    export function LCD1602_Clear(): void {
-        _LCD1602.ClearScreen()
-    }
-
-    //% blockId=LCD1602_Init block="LCD1602 Init"
-    //% subcategory="LCD1602"
-    export function LCD1602_Init(): void {
-        if (!LCD1602Init) {
-            _LCD1602 = new LCD1602()
-            LCD1602Init = true
-        }
-        _LCD1602.init()
     }
 }
