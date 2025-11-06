@@ -75,8 +75,8 @@ const enum MyAnalogPin {
     P10 = 110
 }
 
-//% color="#31C7D5" weight=10 icon="\uf2db"
-namespace Microbit_Kit {
+//% color="#31C7D5" weight=10 icon="\uf2db" block="Acebott Microbit Kit"
+namespace Acebott_Microbit_Kit {
     
     //% blockId=LED_Module block="LED at %pin| is %status"   group="LED"
     //% subcategory=Module
